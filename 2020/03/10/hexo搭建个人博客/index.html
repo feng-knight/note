@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/note/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/note/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/note/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/note/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hexo搭建个人博客 准备工具  Node Git Gitee(码云)   1.环境搭建1.1安装Node 点击进入Node官网Node下载 傻瓜式的安装 点击下载git 傻瓜式的安装 用gitbash检测Node是否安装成功  123node -v# 出现版本号说明安装成功v10.16.0  1.2配置Gitee(码云) 傻瓜式注册登录  线上公钥和线下私钥配对  用户可以通过主页右上角 「个人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo搭建个人博客">
+<meta property="og:url" content="https://feng-knight.gitee.io/note/2020/03/10/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="F゛">
+<meta property="og:description" content="Hexo搭建个人博客 准备工具  Node Git Gitee(码云)   1.环境搭建1.1安装Node 点击进入Node官网Node下载 傻瓜式的安装 点击下载git 傻瓜式的安装 用gitbash检测Node是否安装成功  123node -v# 出现版本号说明安装成功v10.16.0  1.2配置Gitee(码云) 傻瓜式注册登录  线上公钥和线下私钥配对  用户可以通过主页右上角 「个人">
+<meta property="og:image" content="http://zhanglei_c.gitee.io/blog/imgs/1.png">
+<meta property="og:image" content="http://zhanglei_c.gitee.io/blog/imgs/2.png">
+<meta property="og:image" content="http://zhanglei_c.gitee.io/blog/imgs/3.png">
+<meta property="og:image" content="http://zhanglei_c.gitee.io/blog/imgs/4.png">
+<meta property="article:published_time" content="2020-03-10T12:08:02.000Z">
+<meta property="article:modified_time" content="2024-07-30T05:52:30.233Z">
+<meta property="article:author" content="F゛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhanglei_c.gitee.io/blog/imgs/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/note/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://feng-knight.gitee.io/note/2020/03/10/hexo搭建个人博客/"/>
+
+
+
+
+
+  <title>hexo搭建个人博客 | F゛</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/note/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">F゛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Now that we have come so far, we might as well go a little further(既然已经走了这么远了，不如再往前走一走)</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://feng-knight.gitee.io/note/note/2020/03/10/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="F゛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/note/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F゛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hexo搭建个人博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-10T20:08:02+08:00">
+                2020-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Hexo搭建个人博客"><a href="#Hexo搭建个人博客" class="headerlink" title="Hexo搭建个人博客"></a>Hexo搭建个人博客</h2><blockquote>
+<p>准备工具</p>
+<ul>
+<li>Node</li>
+<li>Git</li>
+<li>Gitee(码云)</li>
+</ul>
+</blockquote>
+<h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h3><h4 id="1-1安装Node"><a href="#1-1安装Node" class="headerlink" title="1.1安装Node"></a>1.1安装Node</h4><ul>
+<li>点击进入Node官网<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node</a>下载</li>
+<li>傻瓜式的安装</li>
+<li>点击下载<a href="https://git-scm.com/" target="_blank" rel="noopener">git</a></li>
+<li>傻瓜式的安装</li>
+<li>用<code>gitbash</code>检测Node是否安装成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line"># 出现版本号说明安装成功</span><br><span class="line">v10.16.0</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2配置Gitee-码云"><a href="#1-2配置Gitee-码云" class="headerlink" title="1.2配置Gitee(码云)"></a>1.2配置<a href="https://gitee.com/" target="_blank" rel="noopener">Gitee(码云)</a></h4><ul>
+<li><p>傻瓜式注册登录</p>
+</li>
+<li><p>线上公钥和线下私钥配对</p>
+<ul>
+<li><p>用户可以通过主页右上角 <strong>「个人设置」-&gt;「安全设置」-&gt;「SSH公钥」-&gt;「添加公钥」</strong></p>
+</li>
+<li><p>怎么生成公钥？<a href="https://gitee.com/help/articles/4181" target="_blank" rel="noopener">教程(下面会写，也可不看)</a></p>
+<ul>
+<li>在<code>gitbash</code>运行以下命令来生成公钥</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 后面为注册账号的邮箱</span><br><span class="line">ssh-keygen -t rsa -C &quot;xxxxx@xxxxx.com&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按照提示完成三次回车，即可生成 ssh key。通过查看 <code>~/.ssh/id_rsa.pub</code> 文件内容，获取到你的 public key</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br><span class="line"># 以下就是你生成的公钥，复制它</span><br><span class="line"># ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6eNtGpNGwstc....</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>把刚刚复制的公钥粘贴到下面的内容区域，点击确定，此时git的配置差不多就完毕了</p>
+<p><a href="http://zhanglei_c.gitee.io/blog/imgs/1.png" target="_blank" rel="noopener"><img src="http://zhanglei_c.gitee.io/blog/imgs/1.png" alt="公钥"></a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3全局安装Hexo"><a href="#1-3全局安装Hexo" class="headerlink" title="1.3全局安装Hexo"></a>1.3全局安装Hexo</h4><ul>
+<li>打开gitbash执行以下命令(先读完下一点在决定怎么运行命令！)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line"># 检测是否安装成功</span><br><span class="line">hexo -v</span><br><span class="line"># 能打印出以下相关信息则说明 hexo 安装成功</span><br><span class="line">hexo: 3.8.0</span><br><span class="line">hexo-cli: 1.1.0</span><br><span class="line">os: Windows_NT 10.0.17134 win32 x64</span><br><span class="line">http_parser: 2.8.0</span><br><span class="line">node: 10.16.0</span><br><span class="line">v8: 6.8.275.32-node.52</span><br><span class="line">uv: 1.28.0</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 64</span><br><span class="line">nghttp2: 1.34.0</span><br><span class="line">napi: 4</span><br><span class="line">openssl: 1.1.1b</span><br><span class="line">icu: 64.2</span><br><span class="line">unicode: 12.1</span><br><span class="line">cldr: 35.1</span><br><span class="line">tz: 2019a</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果觉得<code>npm</code>太慢了的话可以考虑国内淘宝的服务器镜像<a href="https://npm.taobao.org/" target="_blank" rel="noopener">cnpm</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 执行以下命令就可以安装 cnpm 了</span><br><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line"># 安装完成后以后你就可以使用 cnpm 来替换 npm 了，用法和功能完全和 npm 一毛一样</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在你觉得合适的磁盘写新建一个名为 hexo 的文件夹（例如D：\hexo）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 进入这个文件夹</span><br><span class="line">cd d:&#x2F;hexo</span><br><span class="line"># 初始化 hexo</span><br><span class="line">hexo init</span><br><span class="line"># 安装相关依赖</span><br><span class="line">cnpm install</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>现在来打开我们的hexo</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># hexo generate 可简写为 hexo g</span><br><span class="line">hexo generate</span><br><span class="line"># hexo server 可简写为 hexo s</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>他应该会提示你的服务已经开起在<strong>localhost:4000</strong>的地址下了，赶紧去访问瞅瞅吧</li>
+</ul>
+<h3 id="2-创作部署"><a href="#2-创作部署" class="headerlink" title="2.创作部署"></a>2.创作部署</h3><h4 id="2-1创作发布你的Blog"><a href="#2-1创作发布你的Blog" class="headerlink" title="2.1创作发布你的Blog"></a>2.1创作发布你的Blog</h4><ul>
+<li>hexo 博客内容使用 markdown 进行编写，如果不会 markdown 语法的话可以去学习学习呦，特别简单</li>
+<li>这里附上学习链接<a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener">markdown语法</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 执行以下命令可以创建一个新的markdown文件 路径（hexo\source\_posts\first_blog.md）</span><br><span class="line">hexo new &#39;first_blog&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>现在你就可以去编辑你的 first_blog 去创作你的文章啦！</li>
+<li>假设你已经写完了你的md文件，现在需要发布到服务器上去，也很简单只要执行两个命令就ok了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再去刷新你的网页看刚写的文件是否已经成功上传了呢</li>
+</ul>
+<blockquote>
+<p>目前为止你的博客只是在本地访问，并不能上传到外网，好在 gitee 提供了一个免费的服务器，可以让你的博客跑在人家的服务器上</p>
+</blockquote>
+<h4 id="2-2部署-hexo-到Gitee-Pages"><a href="#2-2部署-hexo-到Gitee-Pages" class="headerlink" title="2.2部署 hexo 到Gitee Pages"></a>2.2部署 hexo 到Gitee Pages</h4><ul>
+<li>在gitee上新建一个blog仓库用来保存你的博客内容（怎么创建仓库就不说了。。。）</li>
+<li>复制这个https地址</li>
+<li><a href="http://zhanglei_c.gitee.io/blog/imgs/2.png" target="_blank" rel="noopener"><img src="http://zhanglei_c.gitee.io/blog/imgs/2.png" alt="https"></a></li>
+<li>进入项目目录下的<code>_config.yml</code>配置文件,用编辑器打开这个配置文件，在配置文件的最后找到以下部分，修改完毕保存</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;gitee.com&#x2F;ZhangLei_c&#x2F;blog.git # 这里填你刚刚复制的https地址</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行以下命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 清除缓存</span><br><span class="line">hexo clean</span><br><span class="line"># 部署</span><br><span class="line">hexo g</span><br><span class="line"># 发布 （hexo depoly 可简写成 hexo d）</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看gitee仓库中代码有没有更新，若blog仓库中的代码同步更新了 ，说明发布成功</li>
+<li>点开gitee提供的pages服务</li>
+</ul>
+<p><a href="http://zhanglei_c.gitee.io/blog/imgs/3.png" target="_blank" rel="noopener"><img src="http://zhanglei_c.gitee.io/blog/imgs/3.png" alt="gitee pages"></a></p>
+<ul>
+<li>进去后点击发布，等待数秒后他会给你一个网址，这个网址就是你的在线博客的地址了</li>
+</ul>
+<p><a href="http://zhanglei_c.gitee.io/blog/imgs/4.png" target="_blank" rel="noopener"><img src="http://zhanglei_c.gitee.io/blog/imgs/4.png" alt="page url"></a></p>
+<ul>
+<li><p>现在你进入这个网址可能会发现，为啥我没有css样式呢？解决方案如下：</p>
+<ul>
+<li>还是<code>_config.yml</code>,找到下面的位置，配置相关信息即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as &#39;http:&#x2F;&#x2F;yoursite.com&#x2F;child&#39; and root as &#39;&#x2F;child&#x2F;&#39;</span><br><span class="line">url: http:&#x2F;&#x2F;zhanglei_c.gitee.io&#x2F;blog #这里配置的你的博客在线地址</span><br><span class="line">root: &#x2F;blog&#x2F; #这里写成&#x2F;blog&#x2F;</span><br><span class="line">permalink: :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F;</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再去重新部署一下你的服务器应该就ok啦</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2020/02/06/Markdown%E8%AF%AD%E6%B3%95/" rel="next" title="Markdown语法">
+                <i class="fa fa-chevron-left"></i> Markdown语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2020/03/14/jQuery/" rel="prev" title="jQuery">
+                jQuery <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/note/images/dog.jpg"
+                alt="F゛" />
+            
+              <p class="site-author-name" itemprop="name">F゛</p>
+              <p class="site-description motion-element" itemprop="description">study hard and make progress every day!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/note/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo搭建个人博客"><span class="nav-number">1.</span> <span class="nav-text">Hexo搭建个人博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">1.环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1安装Node"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1安装Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2配置Gitee-码云"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2配置Gitee(码云)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3全局安装Hexo"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3全局安装Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创作部署"><span class="nav-number">1.2.</span> <span class="nav-text">2.创作部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1创作发布你的Blog"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1创作发布你的Blog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2部署-hexo-到Gitee-Pages"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2部署 hexo 到Gitee Pages</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">F゛</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/note/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

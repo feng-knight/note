@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/note/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/note/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/note/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/note/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 常用值类型Python中常用的有6种值（数据）的类型    类型 描述 说明    数字（Number） 整数（int）浮点数（float）复数（complex）布尔（bool） 复数，如：3+3j布尔，True、False   字符串（String） 描述文本的一种数据类型 字符串（string）由任意数量的字符组成   列表（List） 有序的可变序列 Python中使用最频繁的数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python">
+<meta property="og:url" content="https://feng-knight.gitee.io/note/2021/02/08/Python/index.html">
+<meta property="og:site_name" content="F゛">
+<meta property="og:description" content="1. 常用值类型Python中常用的有6种值（数据）的类型    类型 描述 说明    数字（Number） 整数（int）浮点数（float）复数（complex）布尔（bool） 复数，如：3+3j布尔，True、False   字符串（String） 描述文本的一种数据类型 字符串（string）由任意数量的字符组成   列表（List） 有序的可变序列 Python中使用最频繁的数据类型">
+<meta property="article:published_time" content="2021-02-08T01:19:29.000Z">
+<meta property="article:modified_time" content="2024-06-07T09:32:08.781Z">
+<meta property="article:author" content="F゛">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/note/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://feng-knight.gitee.io/note/2021/02/08/Python/"/>
+
+
+
+
+
+  <title>Python | F゛</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/note/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">F゛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Now that we have come so far, we might as well go a little further(既然已经走了这么远了，不如再往前走一走)</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://feng-knight.gitee.io/note/note/2021/02/08/Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="F゛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/note/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F゛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-08T09:19:29+08:00">
+                2021-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-常用值类型"><a href="#1-常用值类型" class="headerlink" title="1. 常用值类型"></a>1. 常用值类型</h4><p>Python中常用的有6种值（数据）的类型</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">描述</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">数字（Number）</td>
+<td align="left">整数（int）<br />浮点数（float）<br />复数（complex）<br />布尔（bool）</td>
+<td align="left">复数，如：3+3j<br />布尔，True、False</td>
+</tr>
+<tr>
+<td align="left">字符串（String）</td>
+<td align="left">描述文本的一种数据类型</td>
+<td align="left">字符串（string）由任意数量的字符组成</td>
+</tr>
+<tr>
+<td align="left">列表（List）</td>
+<td align="left">有序的可变序列</td>
+<td align="left">Python中使用最频繁的数据类型，可有序记录一堆数据</td>
+</tr>
+<tr>
+<td align="left">元组（Tuple）</td>
+<td align="left">有序的不可变序列</td>
+<td align="left">可有序记录一堆不可变的Python数据集合</td>
+</tr>
+<tr>
+<td align="left">集合（Set）</td>
+<td align="left">无序不重复集合</td>
+<td align="left">可无序记录一堆不重复的Python数据集合</td>
+</tr>
+<tr>
+<td align="left">字典（Dictionary）</td>
+<td align="left">无序Key-Value集合</td>
+<td align="left">可无序记录一堆Key-Value型的Python数据集合</td>
+</tr>
+</tbody></table>
+<h4 id="2-数据类型的转换"><a href="#2-数据类型的转换" class="headerlink" title="2. 数据类型的转换"></a>2. 数据类型的转换</h4><p>常见的转换语句：</p>
+<table>
+<thead>
+<tr>
+<th>语句(函数)</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int(x)</td>
+<td>将x转换为一个整数</td>
+</tr>
+<tr>
+<td>float(x)</td>
+<td>将x转换为一个浮点数</td>
+</tr>
+<tr>
+<td>Str(x)</td>
+<td>将x转换为一个字符串</td>
+</tr>
+</tbody></table>
+<h4 id="3-算数运算符"><a href="#3-算数运算符" class="headerlink" title="3. 算数运算符"></a>3. 算数运算符</h4><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>//</td>
+<td>取整除</td>
+</tr>
+<tr>
+<td>**</td>
+<td>指数</td>
+</tr>
+</tbody></table>
+<h4 id="4-字符串"><a href="#4-字符串" class="headerlink" title="4. 字符串"></a>4. 字符串</h4><p>(1)字符串格式化1：</p>
+<blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'三'</span></span><br><span class="line">full_name = <span class="string">'张%s今年%s岁'</span> % name</span><br><span class="line">print(full_name)</span><br><span class="line"><span class="comment"># 张三</span></span><br><span class="line"></span><br><span class="line">sex = <span class="number">20</span></span><br><span class="line">text = <span class="string">'张%s今年%s岁'</span> % (name, sex)</span><br><span class="line">print(text)</span><br><span class="line"><span class="comment"># 张三今年20岁</span></span><br></pre></td></tr></table></figure>
+
+<p>其中的, <code>%s</code></p>
+<ul>
+<li><code>%</code>表示: 我要占位</li>
+<li><code>s</code>表示: 将变量变成字符串放入展位的地方</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>格式符号</th>
+<th>转化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>将内容转换成字符串，放入占位位置</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>将内容转换成整数，放入占位位置</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>将内容转换成浮点型，放入占位位置</td>
+</tr>
+</tbody></table>
+<p>格式化数字精度控制：</p>
+<blockquote>
+<p>使用辅助符号<code>m.n</code>来控制数据的宽度和精度</p>
+<p>① <code>m</code>，控制宽度，<strong>要求是数字</strong>，<font color="blue">设置的宽度小于自身，不生效</font></p>
+<p>② <code>.n</code>，控制小数点精度，<strong>要求是数字</strong>，<font color="blue">会进行小数的四舍五入</font></p>
+<p>eg:</p>
+<blockquote>
+<p><code>%5d</code>: 表示将整数的宽度控制在5位，如数字11，被设置为%5d，会变成：[空格] [空格] [空格]11，会用3个空格补足宽度</p>
+<p><code>%5.2f</code>: 表示将宽度控制在5位，将小数点精度设置为2。<strong>小数点和小数部分也算入宽度计算</strong>。如数字11.345，被设置为%7.2f，会变成：[空格] [空格]11.35，会用2个空格补足宽度</p>
+</blockquote>
+</blockquote>
+<p>(2) 字符串格式化2：</p>
+<p>语法：<code>f&quot;内容{变量}&quot;</code></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'张三'</span></span><br><span class="line">sex = <span class="number">20</span></span><br><span class="line">print(<span class="string">f"<span class="subst">&#123;name&#125;</span>今年<span class="subst">&#123;sex&#125;</span>岁"</span>)</span><br><span class="line"><span class="comment"># 张三今年20岁</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-语法"><a href="#5-语法" class="headerlink" title="5. 语法"></a>5. 语法</h4><p>(1) for循环语句，本质上是遍历：<strong>序列类型</strong></p>
+<p>(2) range语句：获取<strong>数字序列</strong>    <code>range(num1, num2, step)</code></p>
+<p>获取一个从0开始或num1，到num2结束的数字序列（不含num2本身），step为数字之间的步长，默认为1。如range(5) –&gt; [0, 1, 2, 3, 4]，range(5, 10, 2) –&gt; [5, 7, 9]</p>
+<p>(3) continue：中断本次循环，直接进行下一次循环</p>
+<p>​        break关键字用于：直接结束循环，for和while都可以使用</p>
+<h4 id="6-函数"><a href="#6-函数" class="headerlink" title="6. 函数"></a>6. 函数</h4><p>(1) 函数的定义：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> 函数名<span class="params">(参数)</span>:</span></span><br><span class="line">  函数体</span><br><span class="line">  <span class="keyword">return</span> 返回值</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">fun函数说明</span></span><br><span class="line"><span class="string">:param key: 入参</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(key)</span>:</span></span><br><span class="line">    lastKey = key + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> lastKey</span><br><span class="line">    <span class="comment"># 若函数无 return, 则返回 None</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">f'函数输出：<span class="subst">&#123; fun(<span class="number">3</span>) &#125;</span>'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-数据容器"><a href="#7-数据容器" class="headerlink" title="7. 数据容器"></a>7. 数据容器</h4><p>(1) 一种可以容纳多份数据的数据类型，容纳的每一份数据称之为1个元素每一个元素，可以是任意类型的数据，如字符串、数字、布尔等。</p>
+<p>(2) 分为5类： <strong><font color="blue">列表(list)、元组(tuple)、字符串（str)、集合(set)、字典(dict)</font></strong></p>
+<h5 id="①-列表-list-："><a href="#①-列表-list-：" class="headerlink" title="①  列表(list)："></a>①  <font color="blue">列表(list)</font>：</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#字面量</span></span><br><span class="line">[元素<span class="number">1</span>, 元素<span class="number">2</span>, 元素<span class="number">3</span>, 元素<span class="number">4</span>, ...]</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义变量</span></span><br><span class="line">变量名称 = [元素<span class="number">1</span>, 元素<span class="number">2</span>, 元素<span class="number">3</span>, 元素<span class="number">4</span>, ...]</span><br><span class="line"><span class="comment">#定义空列表</span></span><br><span class="line">变量名称 = []</span><br><span class="line">变量名称 = <span class="number">1</span>ist()</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="列表方法："><a href="#列表方法：" class="headerlink" title="列表方法："></a>列表方法：</h6><h6 id="lt-1-gt-index-查找某元素的下标："><a href="#lt-1-gt-index-查找某元素的下标：" class="headerlink" title="&lt;1&gt; index() 查找某元素的下标："></a>&lt;1&gt; <strong><code>index()</code> 查找某元素的下标：</strong></h6><blockquote>
+<p>功能：查找指定元素在列表的下标，如果找不到，报错ValueError<br>语法：<code>列表.index(元素)</code><br>index 就是列表对象（变量）内置的方法（函数）</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'test'</span>, <span class="string">'python'</span>]</span><br><span class="line">index = list.index(test)</span><br><span class="line">print(<span class="string">f"test所在index为：<span class="subst">&#123; index &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># test所在index为：0</span></span><br><span class="line"></span><br><span class="line">index2 = list.index(<span class="string">'none'</span>)</span><br><span class="line">print(<span class="string">f"none所在index为：<span class="subst">&#123; index2 &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># ValueError: 'none' is not in list</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-2-gt-修改特定位置（索引）的元素值："><a href="#lt-2-gt-修改特定位置（索引）的元素值：" class="headerlink" title="&lt;2&gt; 修改特定位置（索引）的元素值："></a>&lt;2&gt; <strong>修改特定位置（索引）的元素值：</strong></h6><blockquote>
+<p>语法：<code>列表[下标] = 值</code><br>可以使用如上语法，直接对指定下标（正向、反向下标均可)的值进行：重新赋值（修改)</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'test'</span>, <span class="string">'python'</span>]</span><br><span class="line">list[<span class="number">0</span>] = <span class="string">'newTest'</span></span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：['newTest', 'python']</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-3-gt-insert-插入元素："><a href="#lt-3-gt-insert-插入元素：" class="headerlink" title="&lt;3&gt; insert() 插入元素："></a>&lt;3&gt; <strong><code>insert()</code> 插入元素：</strong></h6><blockquote>
+<p>语法：<code>列表.insert(下标, 元素)</code></p>
+<p>在指定的下标位置，插入指定的元素</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'test'</span>, <span class="string">'python'</span>]</span><br><span class="line">list.insert(<span class="number">2</span>, <span class="string">'insertValue'</span>)</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：['test', 'python', 'insertValue']</span></span><br><span class="line"></span><br><span class="line">list = [<span class="string">'test'</span>, <span class="string">'python'</span>]</span><br><span class="line">list.insert(<span class="number">0</span>, <span class="string">'insertValue'</span>)</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：['test', 'test', 'python']</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-4-gt-append-追加元素："><a href="#lt-4-gt-append-追加元素：" class="headerlink" title="&lt;4&gt; append() 追加元素："></a>&lt;4&gt; <strong><code>append()</code> 追加元素：</strong></h6><blockquote>
+<p>语法：<code>列表.append(元素)</code></p>
+<p>将指定元素追加到列表的尾部</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">list.append(<span class="string">'appendValue'</span>)</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[1, 2, 'appendValue']</span></span><br><span class="line"></span><br><span class="line">list = [<span class="number">10</span>, <span class="number">11</span>]</span><br><span class="line">list.append([ <span class="string">'appendValue1'</span>, <span class="string">'appendValue2'</span> ])</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[ 10, 11, [ 'appendValue1', 'appendValue2' ] ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-5-gt-exend-追加元素："><a href="#lt-5-gt-exend-追加元素：" class="headerlink" title="&lt;5&gt; exend() 追加元素："></a>&lt;5&gt; <strong><code>exend()</code> 追加元素：</strong></h6><blockquote>
+<p>语法：<code>列表.exend(其他数据容器)</code></p>
+<p>将其他数据容器的内容取出，依次追加到列表的尾部</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">10</span>, <span class="number">11</span>]</span><br><span class="line">list.exend([ <span class="string">'appendValue1'</span>, <span class="string">'appendValue2'</span> ])</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[ 10, 11, 'appendValue1', 'appendValue2' ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-6-gt-del-删除元素："><a href="#lt-6-gt-del-删除元素：" class="headerlink" title="&lt;6&gt; del 删除元素："></a>&lt;6&gt; <strong><code>del</code> 删除元素：</strong></h6><blockquote>
+<p>语法：<code>del 列表[下标]</code></p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">del</span> list[<span class="number">1</span>]</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[ 1 ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-7-gt-pop-删除并取出元素："><a href="#lt-7-gt-pop-删除并取出元素：" class="headerlink" title="&lt;7&gt; pop() 删除并取出元素："></a>&lt;7&gt; <strong><code>pop()</code> 删除并取出元素：</strong></h6><blockquote>
+<p>语法：<code>列表.pop(下标)</code></p>
+<p>将列表指定index的内容取出，返回取出的元素</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">list.pop(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[ 1 ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-8-gt-remove-删除某元素再列表中的一个匹配项："><a href="#lt-8-gt-remove-删除某元素再列表中的一个匹配项：" class="headerlink" title="&lt;8&gt; remove() 删除某元素再列表中的一个匹配项："></a>&lt;8&gt; <strong><code>remove()</code> 删除某元素再列表中的一个匹配项：</strong></h6><blockquote>
+<p>语法：<code>列表.remove(元素)</code></p>
+<p>从前到后搜索列表的值，匹配到第一个次元素时删除</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">list.remove(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[ 2, 1 ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-9-gt-clear-清空列表："><a href="#lt-9-gt-clear-清空列表：" class="headerlink" title="&lt;9&gt; clear() 清空列表："></a>&lt;9&gt; <strong><code>clear()</code> 清空列表：</strong></h6><blockquote>
+<p>语法：<code>列表.clear()</code></p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">list.clear()</span><br><span class="line">print(<span class="string">f"list值为：<span class="subst">&#123; list &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list值为：[]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-10-gt-count-统计列表内某元素的数量："><a href="#lt-10-gt-count-统计列表内某元素的数量：" class="headerlink" title="&lt;10&gt; count() 统计列表内某元素的数量："></a>&lt;10&gt; <strong><code>count()</code> 统计列表内某元素的数量：</strong></h6><blockquote>
+<p>语法：<code>列表.count(元素)</code></p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">num = list.count(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">f"list中“1”的数量为：<span class="subst">&#123; num &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list中“1”的数量为：2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-11-gt-len-统计列表中全部元素的数量："><a href="#lt-11-gt-len-统计列表中全部元素的数量：" class="headerlink" title="&lt;11&gt; len() 统计列表中全部元素的数量："></a>&lt;11&gt; <strong><code>len()</code> 统计列表中全部元素的数量：</strong></h6><blockquote>
+<p>语法：<code>len(列表)</code></p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">num = len(list)</span><br><span class="line">print(<span class="string">f"list中元素的数量为：<span class="subst">&#123; num &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># list中元素的数量为：3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="列表的循环遍历："><a href="#列表的循环遍历：" class="headerlink" title="列表的循环遍历："></a>列表的循环遍历：</h6><h6 id="lt-1-gt-while循环："><a href="#lt-1-gt-while循环：" class="headerlink" title="&lt;1&gt; while循环："></a>&lt;1&gt; <code>while</code>循环：</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> index &lt; len(list):</span><br><span class="line">    num = list[index]</span><br><span class="line">    print(<span class="string">f"while 循环list中index为<span class="subst">&#123; index &#125;</span>的元素为：<span class="subst">&#123; num &#125;</span>"</span>)</span><br><span class="line">    index += <span class="number">1</span></span><br><span class="line"><span class="comment"># while 循环list中index为0的元素为：1</span></span><br><span class="line"><span class="comment"># while 循环list中index为1的元素为：2</span></span><br><span class="line"><span class="comment"># while 循环list中index为2的元素为：3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-2-gt-for循环："><a href="#lt-2-gt-for循环：" class="headerlink" title="&lt;2&gt; for循环："></a>&lt;2&gt; <code>for</code>循环：</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> list:</span><br><span class="line">    print(<span class="string">f"for 循环list中的元素为：<span class="subst">&#123;num&#125;</span>"</span>)</span><br><span class="line"><span class="comment"># for循环list中的元素为：1</span></span><br><span class="line"><span class="comment"># for 循环list中的元素为：2</span></span><br><span class="line"><span class="comment"># for 循环list中的元素为：3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="②-元组-tuple-："><a href="#②-元组-tuple-：" class="headerlink" title="② 元组(tuple)："></a>② <font color="blue">元组(tuple)</font>：</h5><blockquote>
+<p><font color="red">注：</font> 1. 元组一旦定义完成，就不可更改！</p>
+<p>​            2. 但如果元组内嵌套了列表list元素，则列表list可以更改。</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">元组定义：定义元组使用小括号，且使用逗号隔开，数据可以是不同数据类型的。</span><br><span class="line"><span class="comment"># 定义元组字面量</span></span><br><span class="line">(元素, 元素, ..., 元素)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义元组变量</span></span><br><span class="line">变量名称 = (元素, 元素, ..., 元素)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义空元组</span></span><br><span class="line"><span class="comment"># 方式一：</span></span><br><span class="line">变量名称 = ()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二：</span></span><br><span class="line">变量名称 = tuple()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下标索引取出内容</span></span><br><span class="line">tup = (<span class="number">1</span>, <span class="number">2</span>, (<span class="number">3</span>, <span class="number">4</span>, (<span class="number">5</span>, <span class="number">6</span>), <span class="number">7</span>, <span class="number">8</span>), <span class="number">9</span>, <span class="number">10</span>)</span><br><span class="line">value = tup[<span class="number">2</span>][<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line">print(<span class="string">f"元组tup中取出的元素为：<span class="subst">&#123; value &#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="元组方法："><a href="#元组方法：" class="headerlink" title="元组方法："></a>元组方法：</h6><h6 id="lt-1-gt-index-查找某元素的下标：-1"><a href="#lt-1-gt-index-查找某元素的下标：-1" class="headerlink" title="&lt;1&gt; index() 查找某元素的下标："></a>&lt;1&gt; <strong><code>index()</code> 查找某元素的下标：</strong></h6><blockquote>
+<p>功能：查找指定元素在元组的下标，如果找不到，报错ValueError<br>语法：<code>元组.index(元素)</code><br>index 就是元组对象（变量）内置的方法（函数）</p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tup = (<span class="string">'test'</span>, <span class="string">'python'</span>)</span><br><span class="line">index = tup.index(test)</span><br><span class="line">print(<span class="string">f"test所在index为：<span class="subst">&#123; index &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># test所在index为：0</span></span><br><span class="line"></span><br><span class="line">index2 = tup.index(<span class="string">'none'</span>)</span><br><span class="line">print(<span class="string">f"none所在index为：<span class="subst">&#123; index2 &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># ValueError: tuple.index(x): x not in tuple</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-2-gt-count-统计元组内某元素的数量："><a href="#lt-2-gt-count-统计元组内某元素的数量：" class="headerlink" title="&lt;2&gt; count() 统计元组内某元素的数量："></a>&lt;2&gt; <strong><code>count()</code> 统计元组内某元素的数量：</strong></h6><blockquote>
+<p>语法：<code>元组.count(元素)</code></p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tup = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">num = tup.count(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">f"元组中“1”的数量为：<span class="subst">&#123; num &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># 元组中“1”的数量为：2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="lt-3-gt-len-统计元组中全部元素的数量："><a href="#lt-3-gt-len-统计元组中全部元素的数量：" class="headerlink" title="&lt;3&gt; len() 统计元组中全部元素的数量："></a>&lt;3&gt; <strong><code>len()</code> 统计元组中全部元素的数量：</strong></h6><blockquote>
+<p>语法：<code>len(元组)</code></p>
+</blockquote>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tup= (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">num = len(tup)</span><br><span class="line">print(<span class="string">f"tup中元素的数量为：<span class="subst">&#123; num &#125;</span>"</span>)</span><br><span class="line"><span class="comment"># tup中元素的数量为：3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>P69</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2020/09/09/centos%E4%B8%8B%E5%AE%89%E8%A3%85MongoDB/" rel="next" title="centos下安装MongoDB">
+                <i class="fa fa-chevron-left"></i> centos下安装MongoDB
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2021/04/03/Request%E6%96%B9%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/" rel="prev" title="Request方法与区别">
+                Request方法与区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/note/images/dog.jpg"
+                alt="F゛" />
+            
+              <p class="site-author-name" itemprop="name">F゛</p>
+              <p class="site-description motion-element" itemprop="description">study hard and make progress every day!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/note/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-常用值类型"><span class="nav-number">1.</span> <span class="nav-text">1. 常用值类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-数据类型的转换"><span class="nav-number">2.</span> <span class="nav-text">2. 数据类型的转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-算数运算符"><span class="nav-number">3.</span> <span class="nav-text">3. 算数运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-字符串"><span class="nav-number">4.</span> <span class="nav-text">4. 字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-语法"><span class="nav-number">5.</span> <span class="nav-text">5. 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-函数"><span class="nav-number">6.</span> <span class="nav-text">6. 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-数据容器"><span class="nav-number">7.</span> <span class="nav-text">7. 数据容器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①-列表-list-："><span class="nav-number">7.1.</span> <span class="nav-text">①  列表(list)：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#列表方法："><span class="nav-number">7.1.1.</span> <span class="nav-text">列表方法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-1-gt-index-查找某元素的下标："><span class="nav-number">7.1.2.</span> <span class="nav-text">&lt;1&gt; index() 查找某元素的下标：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-2-gt-修改特定位置（索引）的元素值："><span class="nav-number">7.1.3.</span> <span class="nav-text">&lt;2&gt; 修改特定位置（索引）的元素值：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-3-gt-insert-插入元素："><span class="nav-number">7.1.4.</span> <span class="nav-text">&lt;3&gt; insert() 插入元素：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-4-gt-append-追加元素："><span class="nav-number">7.1.5.</span> <span class="nav-text">&lt;4&gt; append() 追加元素：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-5-gt-exend-追加元素："><span class="nav-number">7.1.6.</span> <span class="nav-text">&lt;5&gt; exend() 追加元素：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-6-gt-del-删除元素："><span class="nav-number">7.1.7.</span> <span class="nav-text">&lt;6&gt; del 删除元素：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-7-gt-pop-删除并取出元素："><span class="nav-number">7.1.8.</span> <span class="nav-text">&lt;7&gt; pop() 删除并取出元素：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-8-gt-remove-删除某元素再列表中的一个匹配项："><span class="nav-number">7.1.9.</span> <span class="nav-text">&lt;8&gt; remove() 删除某元素再列表中的一个匹配项：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-9-gt-clear-清空列表："><span class="nav-number">7.1.10.</span> <span class="nav-text">&lt;9&gt; clear() 清空列表：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-10-gt-count-统计列表内某元素的数量："><span class="nav-number">7.1.11.</span> <span class="nav-text">&lt;10&gt; count() 统计列表内某元素的数量：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-11-gt-len-统计列表中全部元素的数量："><span class="nav-number">7.1.12.</span> <span class="nav-text">&lt;11&gt; len() 统计列表中全部元素的数量：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#列表的循环遍历："><span class="nav-number">7.1.13.</span> <span class="nav-text">列表的循环遍历：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-1-gt-while循环："><span class="nav-number">7.1.14.</span> <span class="nav-text">&lt;1&gt; while循环：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-2-gt-for循环："><span class="nav-number">7.1.15.</span> <span class="nav-text">&lt;2&gt; for循环：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#②-元组-tuple-："><span class="nav-number">7.2.</span> <span class="nav-text">② 元组(tuple)：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#元组方法："><span class="nav-number">7.2.1.</span> <span class="nav-text">元组方法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-1-gt-index-查找某元素的下标：-1"><span class="nav-number">7.2.2.</span> <span class="nav-text">&lt;1&gt; index() 查找某元素的下标：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-2-gt-count-统计元组内某元素的数量："><span class="nav-number">7.2.3.</span> <span class="nav-text">&lt;2&gt; count() 统计元组内某元素的数量：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-3-gt-len-统计元组中全部元素的数量："><span class="nav-number">7.2.4.</span> <span class="nav-text">&lt;3&gt; len() 统计元组中全部元素的数量：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">F゛</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/note/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

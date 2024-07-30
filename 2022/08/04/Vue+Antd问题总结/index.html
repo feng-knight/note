@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/note/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/note/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/note/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/note/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 表单校验时this.$refs[xxx].validate is not a function  校验整个表单（这里有个坑this.$refs[form][0]才有validate方法[0]别忘了加,官方文档示例没有加0）   12345678function(formName)&amp;#123;     this.$refs[formName][0].validate((valid) &#x3D;&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue+Antd问题总结">
+<meta property="og:url" content="https://feng-knight.gitee.io/note/2022/08/04/Vue+Antd%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="F゛">
+<meta property="og:description" content="1. 表单校验时this.$refs[xxx].validate is not a function  校验整个表单（这里有个坑this.$refs[form][0]才有validate方法[0]别忘了加,官方文档示例没有加0）   12345678function(formName)&amp;#123;     this.$refs[formName][0].validate((valid) &#x3D;&gt;">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14707169-570b0d56aa9f7428.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/986/format/webp">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208231345306-2063902997.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208231607311-1689419547.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208232903703-1638404680.png">
+<meta property="og:image" content="https://segmentfault.com/img/bVbIDsj">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210310222744888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2R5dzMzOTAxOTk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210310223032809.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210310222744888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2R5dzMzOTAxOTk=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210310223032809.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13100152-5759fbc39da13d0e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/336/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13100152-e31563525515edc8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/948/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13100152-91228cdd8c729247.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/981/format/webp">
+<meta property="og:image" content="https://segmentfault.com/img/bVbyjrp?w=1920&h=938">
+<meta property="og:image" content="https://img1.itxst.com/c/3/c3b511cc6ab32e7e6c9bcdc4c80c76c8.png">
+<meta property="og:image" content="https://img1.itxst.com/9/2/929eb503addee20abb17fd03f7fa7a51.png">
+<meta property="og:image" content="https://img1.itxst.com/c/3/c399e31c1c65d883bf2aba689488617c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725105920520.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725110432728.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725110616120.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725110801485.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200725115412528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbmdsaXUwODI0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210602100657962.png">
+<meta property="og:image" content="https://www.freesion.com/images/81/214b66cee03e1bc171bfd201cd84b5c9.png">
+<meta property="article:published_time" content="2022-08-03T16:11:58.000Z">
+<meta property="article:modified_time" content="2022-08-03T16:11:58.000Z">
+<meta property="article:author" content="F゛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14707169-570b0d56aa9f7428.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/986/format/webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/note/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://feng-knight.gitee.io/note/2022/08/04/Vue+Antd问题总结/"/>
+
+
+
+
+
+  <title>Vue+Antd问题总结 | F゛</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/note/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">F゛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Now that we have come so far, we might as well go a little further(既然已经走了这么远了，不如再往前走一走)</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://feng-knight.gitee.io/note/note/2022/08/04/Vue+Antd%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="F゛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/note/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F゛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue+Antd问题总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-04T00:11:58+08:00">
+                2022-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-表单校验时this-refs-xxx-validate-is-not-a-function"><a href="#1-表单校验时this-refs-xxx-validate-is-not-a-function" class="headerlink" title="1. 表单校验时this.$refs[xxx].validate is not a function"></a>1. <font color="#00AAF0">表单校验时this.$refs[xxx].validate is not a function</font></h4><hr>
+<blockquote>
+<p>校验整个表单（这里有个坑this.$refs[form][0]才有validate方法[0]别忘了加,官方文档示例没有加0）</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14707169-570b0d56aa9f7428.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/986/format/webp" alt="img"></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">formName</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.$refs[formName][<span class="number">0</span>].validate(<span class="function">(<span class="params">valid</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              isFalse = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>校验单个字段</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">formName,fieldName</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.$refs[formName][<span class="number">0</span>].validateField(fieldName,(res)=&gt;&#123;<span class="comment">//参数1为需校验的 prop即fieldName，参数2为检验完回调,返回错误信息</span></span><br><span class="line">         <span class="comment">//根据结果要做的事情</span></span><br><span class="line">     &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注：</font>转载于：<a href="https://www.jianshu.com/p/452a9f3898cf" target="_blank" rel="noopener">https://www.jianshu.com/p/452a9f3898cf</a></p>
+<hr>
+<h4 id="2-Vue-之qs-使用详解"><a href="#2-Vue-之qs-使用详解" class="headerlink" title="2. Vue 之qs 使用详解"></a>2. <font color="#00AAF0">Vue 之qs 使用详解</font></h4><p>1）<strong>qs插件简介</strong></p>
+<p>最近接触了一个Vue + elementui 的项目,请求数据使用axios发 送请求发现后端接收不到参数,后来知道了要把参数序列化 Vue中提供了qs这个插件。进行数据序列化。</p>
+<p>2）<strong>qs 的基本使用</strong></p>
+<p>2.1 qs的 安装：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install qs / cnpm install qs (安装了淘宝镜像的才可以使用)</span><br></pre></td></tr></table></figure>
+
+<p>2.2 qs 全局引入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在main.js引入qs</span></span><br><span class="line"><span class="keyword">import</span>  qs <span class="keyword">from</span> <span class="string">'qs'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//配全局属性配置，在任意组件内可以使用this.$qs获取qs对象</span></span><br><span class="line"></span><br><span class="line"> Vue.prototype.$qs = qs</span><br></pre></td></tr></table></figure>
+
+<p>2.3 使用qs：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    <span class="comment">//获取部门列表</span></span><br><span class="line">    getDepartments() &#123;</span><br><span class="line">    <span class="keyword">this</span>.listLoading = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">let</span> para = <span class="keyword">this</span>.$refs.queryName.value</span><br><span class="line">    <span class="keyword">let</span> obj=&#123;<span class="attr">name</span>:para&#125;</span><br><span class="line">    <span class="comment">//qs.parse()是将URL解析成对象的形式</span></span><br><span class="line">    <span class="keyword">let</span> query = <span class="keyword">this</span>.$qs.parse(obj)</span><br><span class="line">    <span class="keyword">this</span>.$http.patch(<span class="string">"/department/queryByName"</span>,query).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// this.total = res.data.total;</span></span><br><span class="line">        <span class="keyword">this</span>.departments = res.data;</span><br><span class="line">        <span class="keyword">this</span>.listLoading = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//NProgress.done()</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>前端参数格式：</strong></p>
+<p><a href="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208231345306-2063902997.png" target="_blank" rel="noopener"><img src="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208231345306-2063902997.png" alt="img"></a></p>
+<p>2.4 后端接受参数使用springmvc的@RequestBody接收：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/queryByName"</span>,method = RequestMethod.PATCH)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span>  List&lt;Department&gt; <span class="title">queryByName</span><span class="params">(@RequestBody DepartmentQuery  dep)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"接受参数为:"</span>+dep);</span><br><span class="line">    List&lt;Department&gt; departmentList = departmentService.queryByName(dep);</span><br><span class="line">    <span class="keyword">return</span>  departmentList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后端接收参数格式（<strong>注意使用@RequestBody 接收对象属性要与前端传第json对象的key相同命名哦</strong>）</p>
+<p><a href="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208231607311-1689419547.png" target="_blank" rel="noopener"><img src="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208231607311-1689419547.png" alt="img"></a></p>
+<hr>
+<p>3）<strong>qs的 <code>qs.parse()</code> 和 <code>qs.stringify()</code></strong></p>
+<p>3.1 <code>qs.parse()</code></p>
+<blockquote>
+<p><strong><code>qs.parse()</code>是将URL解析成对象的形式</strong><br>我遇到的问题就是使用此方法解决的。因为后端@RequestBody注解对应的类在将HTTP的输入流(含请求体)装配到目标类(即：@RequestBody后面的类)时，会根据json字符串中的key来匹配对应实体类的属性，如果匹配一致且json中的该key对应的值符合(或可转换为)</p>
+</blockquote>
+<hr>
+<p>3.2 <code>qs.stringify()</code></p>
+<p><strong><code>qs.stringify()</code>将对象 序列化成URL的形式以&amp;进行拼接</strong><br>代码示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Qs = <span class="built_in">require</span>(<span class="string">'qs'</span>);</span><br><span class="line"><span class="keyword">let</span> obj= &#123;</span><br><span class="line"> method: <span class="string">"query_sql_dataset_data"</span>,</span><br><span class="line"> projectId: <span class="string">"85"</span>,</span><br><span class="line"> appToken: <span class="string">"7d22e38e-5717-11e7-907b-a6006ad3dba0"</span>,</span><br><span class="line"> datasetId: <span class="string">" 12564701"</span></span><br><span class="line">  &#125;;</span><br><span class="line">Qs.stringify(obj);</span><br><span class="line"><span class="built_in">console</span>.log(Qs.stringify(obj));</span><br></pre></td></tr></table></figure>
+
+<p><strong>如上面代码所示,输出结果如下</strong><br><a href="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208232903703-1638404680.png" target="_blank" rel="noopener"><img src="https://img2018.cnblogs.com/blog/1766892/201912/1766892-20191208232903703-1638404680.png" alt="img"></a></p>
+<hr>
+<p>4）<strong>JSON中stringify方法和qs中stringify的区别</strong></p>
+<p><code>{&quot;uid&quot;:&quot;cs11&quot;,&quot;pwd&quot;:&quot;000000als&quot;,&quot;username&quot;:&quot;cs11&quot;,&quot;password&quot;:&quot;000000als&quot;}
+uid=cs11&amp;pwd=000000als&amp;username=cs11&amp;password=000000als</code></p>
+<p><strong>如上所示，前者是采用JSON.stringify(param)进行处理，后者是采用Qs.stringify(param)进行处理的。</strong></p>
+<p><font color="red">注：</font>转载于：<a href="https://www.cnblogs.com/qdmpky/p/12008654.html" target="_blank" rel="noopener">https://www.cnblogs.com/qdmpky/p/12008654.html</a></p>
+<hr>
+<h4 id="3-warning-LF-will-be-replaced-by-CRLF-in-（）-的原因及解决办法"><a href="#3-warning-LF-will-be-replaced-by-CRLF-in-（）-的原因及解决办法" class="headerlink" title="3. warning: LF will be replaced by CRLF in （） 的原因及解决办法"></a>3. <font color="#00AAF0">warning: LF will be replaced by CRLF in （） 的原因及解决办法</font></h4><p>问题：git add 命令的时候，弹出了一个警告 warning: LF will be replaced by CRLF in （具体的一个文件）</p>
+<p>原因：LF是linux和Unix系统的换行符，CRLF是window 系统的换行符。这就给跨平台的协作的项目带来了问题，保存文件到底是使用哪个标准呢？ git为了解决这个问题，提供了一个”换行符自动转换“的功能，并且这个功能是默认处于”自动模式“即开启状态的。这个换行符自动转换会把自动把你代码里 与你当前操作系统不相同的换行的方式 转换成当前系统的换行方式（即LF和CRLF 之间的转换），这样一来，当你提交代码的时候，即使你没有修改过某个文件，也被git认为你修改过了，从而提示”LF will be replaced by CRLF in （）</p>
+<p><strong>解决：最简单的一种办法就是把自动转换功能关掉即可。</strong></p>
+<blockquote>
+<p>输入命令 ：</p>
+<p><code>git config core.autocrlf false</code> (仅对当前git仓库有效）<br><code>git config --global core.autocrlf false</code> (全局有效）</p>
+</blockquote>
+<hr>
+<h4 id="4-vantUI中修改NavBar-导航栏字体颜色"><a href="#4-vantUI中修改NavBar-导航栏字体颜色" class="headerlink" title="4. vantUI中修改NavBar 导航栏字体颜色"></a>4. <font color="#00AAF0">vantUI中修改NavBar 导航栏字体颜色</font></h4><p>API文档中，没有说明如何修改NavBar 导航栏的字体颜色，那么当我们需要修改此颜色时，怎么办呢？</p>
+<p><strong>首先会在页面中，审查元素找到组件对应的标签去做修改，如果不能解决，那么就要使用深度选择器<code>/deep/</code> 或 <code>::v-deep</code>，实现对组件内部的样式修改</strong><br><strong>1、引用navBar组件</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;van-nav-bar</span><br><span class="line">	title=<span class="string">"赛程"</span></span><br><span class="line">	right-text=<span class="string">"筛选"</span></span><br><span class="line">	left-arrow</span><br><span class="line">	@click-left=<span class="string">"onClickLeft"</span></span><br><span class="line">	@click-right=<span class="string">"onClickRight"</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、修改组件字体。图标等颜色</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=<span class="string">"stylus"</span> scoped&gt;</span><br><span class="line"> /deep/ .van-ellipsis &#123;</span><br><span class="line">    color: #EE0A24;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">/deep/  .van-nav-bar .van-icon &#123;</span><br><span class="line">    color: #EE0A24;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> /deep/ .van-nav-bar__text &#123;</span><br><span class="line">    color: #EE0A24;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://segmentfault.com/img/bVbIDsj" alt="2.png"></p>
+<p><font color="red">注：</font>转载于：<a href="https://segmentfault.com/a/1190000022992129" target="_blank" rel="noopener">https://segmentfault.com/a/1190000022992129</a></p>
+<hr>
+<h4 id="5-vue组件传参-props-default-数组／对象的默认值应当由一个工厂函数返回"><a href="#5-vue组件传参-props-default-数组／对象的默认值应当由一个工厂函数返回" class="headerlink" title="5. vue组件传参 props default 数组／对象的默认值应当由一个工厂函数返回"></a>5. <font color="#00AAF0">vue组件传参 props default 数组／对象的默认值应当由一个工厂函数返回</font></h4><p><img src="https://img-blog.csdnimg.cn/20210310222744888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2R5dzMzOTAxOTk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>在组件中接收props参数的时候，如果传过来的参数是Object或者Array类型，则defalut这里应该用一个函数返回，否则会报错：<br><code>Invalid default value for prop “slides”: Props with type Object/Array must use a factory function to return the default value.</code></p>
+<p>再举两个例子：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210310223032809.png" alt="在这里插入图片描述"></p>
+<p><font color="red">注：</font>转载于：<a href="https://blog.csdn.net/dyw3390199/article/details/114648508" target="_blank" rel="noopener">https://blog.csdn.net/dyw3390199/article/details/114648508</a></p>
+<hr>
+<h4 id="6-Invalid-default-value-for-prop-“slides”-Props-with-type-Object-Array-must-use-a-factory-function-to-return-the-default-value-amp-amp-vue组件传参-props-default-数组／对象的默认值应当由一个工厂函数返回"><a href="#6-Invalid-default-value-for-prop-“slides”-Props-with-type-Object-Array-must-use-a-factory-function-to-return-the-default-value-amp-amp-vue组件传参-props-default-数组／对象的默认值应当由一个工厂函数返回" class="headerlink" title="6. Invalid default value for prop “slides”: Props with type Object/Array must use a factory function to return the default value &amp;&amp; vue组件传参 props default 数组／对象的默认值应当由一个工厂函数返回"></a>6. <font color="#00AAF0">Invalid default value for prop “slides”: Props with type Object/Array must use a factory function to return the default value &amp;&amp; vue组件传参 props default 数组／对象的默认值应当由一个工厂函数返回</font></h4><p><img src="https://img-blog.csdnimg.cn/20210310222744888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2R5dzMzOTAxOTk=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>在组件中接收props参数的时候，如果传过来的参数是Object或者Array类型，则defalut这里应该用一个函数返回，否则会报错：<br>Invalid default value for prop “slides”: Props with type Object/Array must use a factory function to return the default value.</p>
+<p>再举两个例子:</p>
+<p><img src="https://img-blog.csdnimg.cn/20210310223032809.png" alt="在这里插入图片描述"></p>
+<p><font color="red">注：</font>转载于：<a href="https://blog.csdn.net/dyw3390199/article/details/114648508" target="_blank" rel="noopener">https://blog.csdn.net/dyw3390199/article/details/114648508</a></p>
+<hr>
+<h4 id="7-vue中表单的this-refs-formname-validate不生效"><a href="#7-vue中表单的this-refs-formname-validate不生效" class="headerlink" title="7. vue中表单的this.$refs[formname].validate不生效"></a>7. <font color="#00AAF0">vue中表单的this.$refs[formname].validate不生效</font></h4><p>最近在工作中，有一个后台管理系统的项目，会用到很多的表单，在提交的时候，会出现this.$refs[formname].validate方法不生效，后面查了很多资料，发现，原来是校验那里出了问题。<br>在表单规则制定那里我用到了validator属性，使用这个的时候要注意一个地方，就是必须要返回一个回调函数。<br>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">    <span class="keyword">var</span> validateum = <span class="function">(<span class="params">rule, value, callback</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!value) &#123;</span><br><span class="line">            <span class="keyword">return</span> callback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'生效时间不能为空'</span>))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> callback() <span class="comment">// 注意：这个是必须要的，否则可能导致表单校验不生效</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        rules: &#123;</span><br><span class="line">            um: [&#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">validator</span>: validateum, <span class="attr">message</span>: <span class="string">'账号不能为空'</span> &#125;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用valiator校验规则时，切记一定要返回一个回调函数，使用了if，即使没有else的需求，也要写一个else返回回调函数。否则表单的validate是不会生效的</p>
+<hr>
+<h4 id="8-this-refs-ruleForm-validate-is-not-a-function"><a href="#8-this-refs-ruleForm-validate-is-not-a-function" class="headerlink" title="8. this.$refs.ruleForm.validate is not a function"></a>8. <font color="#00AAF0">this.$refs.ruleForm.validate is not a function</font></h4><p><strong>原来是form（要验证的）不能写在循环里，不然<code>this.$refs[name].validate</code>这一行会一直报错</strong></p>
+<p>解决方式：</p>
+<p>如果你的<code>data</code>是一个数组，那么可以也去循环这个数组，前提是你要获取每次循环的<code>index</code>用来寻找数组数据中的每一个元素对象。如：<code>this.$refs.name[index].validate</code></p>
+<p>循环的表单页面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;a-collapse :bordered=<span class="string">"false"</span> v-<span class="keyword">for</span>=<span class="string">"(row, index) in contacsInfo"</span> :key=<span class="string">"index"</span> v-model=<span class="string">"activeKeyA"</span>&gt;</span><br><span class="line">    &lt;a-form-model ref=<span class="string">"taskform"</span> :model=<span class="string">"row"</span> :rules=<span class="string">"rules"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"bgc"</span>&gt;</span><br><span class="line">            &lt;a-form-model-item label=<span class="string">"联系人姓名"</span> prop=<span class="string">"name"</span> :labelCol=<span class="string">"labelCol"</span> :wrapperCol=<span class="string">"wrapperCol"</span>&gt;</span><br><span class="line">              &lt;a-input v-model=<span class="string">"row.name"</span> placeholder=<span class="string">"请输入联系人姓名"</span> /&gt;</span><br><span class="line">            &lt;<span class="regexp">/a-form-model-item&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &lt;a-form-model-item label="联系电话" prop="mobile" :labelCol="labelCol" :wrapperCol="wrapperCol"&gt;</span></span><br><span class="line"><span class="regexp">              &lt;a-input v-model="row.mobile" placeholder="请输入联系电话" /</span>&gt;</span><br><span class="line">            &lt;<span class="regexp">/a-form-model-item&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>a-form-model&gt;</span><br><span class="line">&lt;<span class="regexp">/a-collapse&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>触发表单循环验证方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">saveContact () &#123;</span><br><span class="line">    <span class="keyword">let</span> flag = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">this</span>.contacsInfo.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$refs.taskform[index].validate(<span class="function"><span class="params">valid</span> =&gt;</span> &#123; <span class="comment">// taskform是表单的ref</span></span><br><span class="line">            <span class="keyword">if</span> (valid) &#123;</span><br><span class="line">                flag = <span class="literal">true</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                flag = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">this</span>.$message.warning(<span class="string">'请先完善联系人信息！'</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="9-VUE-生成二维码插件"><a href="#9-VUE-生成二维码插件" class="headerlink" title="9.  VUE 生成二维码插件"></a>9.  <font color="#00AAF0">VUE 生成二维码插件</font></h4><h5 id="1、qrcodejs2"><a href="#1、qrcodejs2" class="headerlink" title="1、qrcodejs2"></a>1、qrcodejs2</h5><p>1）安装 qrcodejs2  （注意：安装的是qrcodejs2，不要安装qrcode —&gt; 会报错）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install  qrcodejs2 --save</span><br></pre></td></tr></table></figure>
+
+<p>2）页面中引入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="keyword">import</span> QRCode  <span class="keyword">from</span> <span class="string">"qrcodejs2"</span></span></span><br><span class="line">    </span><br><span class="line"><span class="javascript">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    </span><br><span class="line">        data()&#123;</span><br><span class="line"><span class="actionscript">            link: <span class="string">'https://baidu.com'</span></span></span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        components: &#123; QRCode &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3）dom 结构</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"qrcode"</span> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>4）JS 方法编写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    </span><br><span class="line">        data()&#123;</span><br><span class="line">            link: <span class="string">'https://baidu.com'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        </span><br><span class="line">        methods: &#123;</span><br><span class="line">            <span class="comment">//  生成二维码</span></span><br><span class="line">            qrcode () &#123;</span><br><span class="line">                <span class="keyword">let</span> that = <span class="keyword">this</span>;</span><br><span class="line">                <span class="keyword">let</span> qrcode = <span class="keyword">new</span> QRCode(<span class="string">'qrcode'</span>, &#123;</span><br><span class="line">                    width: <span class="number">124</span>,</span><br><span class="line">                    height: <span class="number">124</span>,        <span class="comment">// 高度</span></span><br><span class="line">                    text:  <span class="keyword">this</span>.link,   <span class="comment">// 二维码内容</span></span><br><span class="line">                    <span class="comment">// render: 'canvas' ,   // 设置渲染方式（有两种方式 table和canvas，默认是canvas）</span></span><br><span class="line">                    <span class="comment">// background: '#f0f',   // 背景色</span></span><br><span class="line">                    <span class="comment">// foreground: '#ff0'    // 前景色</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        components: &#123; QRCode &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5）页面调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  注意： 在需要调用的地方  这样必须这样调用  否则会出现  appendChild  null  就是id为qrcode的dom获取不到 返回结果为null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.$nextTick (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.qrcode();</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、vue-qart"><a href="#2、vue-qart" class="headerlink" title="2、vue-qart"></a>2、vue-qart</h5><p>1）  安装 vue-qart</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-qart --save</span><br></pre></td></tr></table></figure>
+
+<p>2）页面中引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> VueQArt <span class="keyword">from</span> <span class="string">'vue-qart'</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    </span><br><span class="line">        data()&#123;</span><br><span class="line">            link: <span class="string">'https://baidu.com'</span></span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        components: &#123; VueQArt &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3）data 中数据配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    </span><br><span class="line">        data()&#123;</span><br><span class="line">            downloadButton:<span class="literal">false</span>,</span><br><span class="line">            config: &#123;</span><br><span class="line">               value: <span class="string">'https://baidu.com'</span>,</span><br><span class="line">               imagePath: <span class="string">'/static/logo/logo.png'</span>,</span><br><span class="line">               filter: <span class="string">'color'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        components: &#123; VueQArt &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>4）dom  结构</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;!--在这里插入内容--&gt;</span><br><span class="line">&lt;vue-q-art :config=<span class="string">"config"</span> :downloadButton=<span class="string">"downloadButton"</span>&gt;&lt;<span class="regexp">/vue-q-art&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、-实际项目中"><a href="#3、-实际项目中" class="headerlink" title="3、 实际项目中"></a>3、 实际项目中</h5><p>3.1  引入文件</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/13100152-5759fbc39da13d0e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/336/format/webp" alt="img"></p>
+<p>qrcodejs2—引入.jpg</p>
+<p>3.2 生成二维码函数</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/13100152-e31563525515edc8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/948/format/webp" alt="img"></p>
+<p>生成二维码的函数.jpg</p>
+<p>3.3  相应的位置调用函数</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/13100152-91228cdd8c729247.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/981/format/webp" alt="img"></p>
+<p>相应的位置调用生成二维码函数.jpg</p>
+<p><font color="red">注：</font>转载于：<a href="https://www.jianshu.com/p/496fd1cbee8d" target="_blank" rel="noopener">https://www.jianshu.com/p/496fd1cbee8d</a></p>
+<hr>
+<h4 id="10-vue中使用vue-qr生成漂亮的二维码"><a href="#10-vue中使用vue-qr生成漂亮的二维码" class="headerlink" title="10. vue中使用vue-qr生成漂亮的二维码"></a>10. <font color="#00AAF0">vue中使用vue-qr生成漂亮的二维码</font></h4><p>最近在项目中遇到一个生成二维码的需求，并且二维码上要带上logo和背景。使用qrcode只能单纯的生成二维码，不能带logo及其它一些自定义。<br> 于是便找到了vue-qr这个插件。vue-qr具有自定义二维码背景、logo、实点颜色等等特性，能够生成更炫酷的二维码。</p>
+<p>vue-qr是<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FSumiMakito%2FAwesome-qr.js" target="_blank" rel="noopener">Awesome-qr.js</a>的Vue 2.x组件</p>
+<h5 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-qr --save</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;vue-qr :correctLevel=<span class="string">"3"</span> :autoColor=<span class="string">"false"</span> colorDark=<span class="string">"#313a90"</span> :bgSrc=<span class="string">"bgSrc"</span> :logoSrc=<span class="string">"logoSrc"</span> :text=<span class="string">"codeUrl"</span> :size=<span class="string">"95"</span> :margin=<span class="string">"0"</span> :logoMargin=<span class="string">"3"</span>&gt;&lt;<span class="regexp">/vue-qr&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import VueQr from 'vue-qr'</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  data () &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">      logoSrc: require('../</span>assets/img/qrlogo.png<span class="string">'),</span></span><br><span class="line"><span class="string">      bgSrc: require('</span>../assets/img/bgSrc.png<span class="string">'),</span></span><br><span class="line"><span class="string">      codeUrl: '</span>https:<span class="comment">//github.com/lx719679895'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    VueQr</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="参数及说明："><a href="#参数及说明：" class="headerlink" title="参数及说明："></a>参数及说明：</h5><h6 id="基础："><a href="#基础：" class="headerlink" title="基础："></a>基础：</h6><table>
+<thead>
+<tr>
+<th>参数</th>
+<th align="left">说明</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text</td>
+<td align="left">二维码内容</td>
+<td>必需</td>
+</tr>
+<tr>
+<td>size</td>
+<td align="left">尺寸, 长宽一致, 包含外边距</td>
+<td>必需</td>
+</tr>
+<tr>
+<td>margin</td>
+<td align="left">二维码图像的外边距, 默认 20px</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>dotScale</td>
+<td align="left">数据区域点缩小比例,默认为0.35</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>correctLevel</td>
+<td align="left">容错级别 0-3</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>whiteMargin</td>
+<td align="left">若设为 true, 背景图外将绘制白色边框（默认是true）</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>bindElement</td>
+<td align="left">指定是否需要自动将生成的二维码绑定到HTML上（默认是true）</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>callback</td>
+<td align="left">生成的二维码 Data URI 可以在回调中取得,第一个参数为二维码 data URL, 第二个参数为 props 传过来的 qid(因为二维码生成是异步的,所以加个 id 用于排序)</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>可以使用 <code>bindElement</code> 来指定要自动填入二维码图像的元素的 ID（不含前导「#」），支持 <code>&lt;div&gt;</code> 或是 <code>&lt;img&gt;</code>。</p>
+</blockquote>
+<h6 id="颜色："><a href="#颜色：" class="headerlink" title="颜色："></a>颜色：</h6><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>colorDark</td>
+<td>实点的颜色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>colorLight</td>
+<td>空白区的颜色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>autoColor</td>
+<td>若为 true, 背景图的主要颜色将作为实点的颜色, 即 colorDark,默认 true</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>若设置了 <code>autoColor</code>，则 <code>colorDark</code> 和 <code>colorLight</code> 都将被忽略。</p>
+</blockquote>
+<h6 id="背景图像："><a href="#背景图像：" class="headerlink" title="背景图像："></a>背景图像：</h6><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bgSrc</td>
+<td>欲嵌入的背景图地址</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>gifBgSrc</td>
+<td>欲嵌入的背景图 gif 地址,设置后普通的背景图将失效。设置此选项会影响性能</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>背景色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>backgroundDimming</td>
+<td>叠加在背景图上的颜色, 在解码有难度的时有一定帮助</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>若设定了 <code>gifBackground</code> ，则 <code>backgroundImage</code> 将会被忽略。</p>
+</blockquote>
+<h6 id="logo图像："><a href="#logo图像：" class="headerlink" title="logo图像："></a>logo图像：</h6><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>logoSrc</td>
+<td>嵌入至二维码中心的 LOGO 地址</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>logoScale</td>
+<td>用于计算 LOGO 大小的值, 过大将导致解码失败, LOGO 尺寸计算公式 logoScale<em>(size-2</em>margin), 默认 0.2</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>logoMargin</td>
+<td>标识周围的空白边框, 默认为0</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>logoBackgroundColor</td>
+<td>背景色,需要设置 logo margin</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>logoCornerRadius</td>
+<td>标识及其边框的圆角半径, 默认为0</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+<h6 id="后处理："><a href="#后处理：" class="headerlink" title="后处理："></a>后处理：</h6><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>必要性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>binarize</td>
+<td>若为 true, 图像将被二值化处理, 未指定阈值则使用默认值，默认是false</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>binarizeThreshold</td>
+<td>(0 &lt; threshold &lt; 255) 二值化处理的阈值</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+<p><font color="red">注：</font>转载于：<a href="https://www.jianshu.com/p/ef5803f2b96b" target="_blank" rel="noopener">https://www.jianshu.com/p/ef5803f2b96b</a></p>
+<hr>
+<h4 id="11-vue-qr生成并下载二维码"><a href="#11-vue-qr生成并下载二维码" class="headerlink" title="11.  vue-qr生成并下载二维码"></a>11.  <font color="#00AAF0">vue-qr生成并下载二维码</font></h4><p><strong>安装vue-qr</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-qr --save</span><br></pre></td></tr></table></figure>
+
+<p>生成二维码实列</p>
+<hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;vue-qr  ref=<span class="string">"Qrcode"</span> </span><br><span class="line">    :text=<span class="string">"qrCodeConfig.text"</span> </span><br><span class="line">    :download=<span class="string">"downloadFilename"</span> </span><br><span class="line">    :margin=<span class="string">"10"</span> </span><br><span class="line">    :size=<span class="string">"200"</span> </span><br><span class="line">    :dotScale=<span class="string">"qrCodeConfig.dotScale"</span> </span><br><span class="line">    :colorDark=<span class="string">"qrCodeConfig.colorDark"</span></span><br><span class="line">&gt;</span><br><span class="line">&lt;<span class="regexp">/vue-qr&gt;</span></span><br><span class="line"><span class="regexp">data()&#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">        qrCodeConfig: &#123;</span></span><br><span class="line"><span class="regexp">            text: 'http:/</span><span class="regexp">/121.40.121.142:8080/</span>register?parent_id=<span class="string">'+id,</span></span><br><span class="line"><span class="string">            dotScale: 0.9,</span></span><br><span class="line">            colorDark: '#663300'</span><br><span class="line">        &#125;,</span><br><span class="line">        downloadFilename:<span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>属性介绍</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>举列</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text</td>
+<td>要生成二维码的内容</td>
+<td><a href="https://segmentfault.com/write" target="_blank" rel="noopener">https://segmentfault.com/write</a></td>
+</tr>
+<tr>
+<td>size</td>
+<td>设置二维码大小,宽高相等</td>
+<td>200</td>
+</tr>
+<tr>
+<td>margin</td>
+<td>二维码与边框的距离,可以设置白边</td>
+<td>20</td>
+</tr>
+<tr>
+<td>colorDark</td>
+<td>实点的颜色</td>
+<td>#333</td>
+</tr>
+<tr>
+<td>colorLight</td>
+<td>空白区的颜色</td>
+<td>#999</td>
+</tr>
+<tr>
+<td>bgSrc</td>
+<td>欲嵌入的背景图地址</td>
+<td><a href="https://link.segmentfault.com/?enc=BGU1J6CvIBSoDyFhVYY3rg%3D%3D.aOBIxFA8ZR5%2Bt0IkWcMulIg3A6QT3iEKBn2TRyy7ZZM%3D" target="_blank" rel="noopener">https://www.vipbic.com/</a>****.jpg</td>
+</tr>
+<tr>
+<td>gifBgSrc</td>
+<td>欲嵌入的背景图 gif 地址,设置后普通的背景图将失效。设置此选项会影响性能</td>
+<td>200</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>背景色</td>
+<td>#666</td>
+</tr>
+<tr>
+<td>backgroundDimming</td>
+<td>叠加在背景图上的颜色, 在解码有难度的时有一定帮助</td>
+<td>#444</td>
+</tr>
+<tr>
+<td>logoSrc</td>
+<td>中央图片或logo的路径</td>
+<td><a href="https://link.segmentfault.com/?enc=IThoDxl9NUVNGjbKjKKeig%3D%3D.SGxkgCipT8Rsgxnp3X01Yq47foy5BtmKUaiVHESQCMQ%3D" target="_blank" rel="noopener">https://www.vipbic.com/</a>****.jpg</td>
+</tr>
+<tr>
+<td>logoMargin</td>
+<td>LOGO 标识周围的空白边框</td>
+<td>1</td>
+</tr>
+<tr>
+<td>logoBackgroundColor</td>
+<td>Logo 背景色,需要设置 logo margin</td>
+<td>#888</td>
+</tr>
+<tr>
+<td>logoCornerRadius</td>
+<td>LOGO 标识及其边框的圆角半径</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p><strong>下载二维码</strong></p>
+<hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">downloadImg () &#123;</span><br><span class="line">      <span class="keyword">const</span> iconUrl = <span class="keyword">this</span>.$refs.Qrcode.$el.src</span><br><span class="line">      <span class="keyword">let</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>)</span><br><span class="line">      <span class="keyword">let</span> event = <span class="keyword">new</span> MouseEvent(<span class="string">'click'</span>)</span><br><span class="line">      a.download = <span class="string">'二维码'</span></span><br><span class="line">      a.href = iconUrl</span><br><span class="line">      a.dispatchEvent(event)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终效果</p>
+<hr>
+<p><img src="https://segmentfault.com/img/bVbyjrp?w=1920&h=938" alt="clipboard.png"></p>
+<p>最终代码</p>
+<hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"full-screen-btn-con"</span>&gt;</span><br><span class="line">    &lt;Button type=<span class="string">"warning"</span> @click=<span class="string">"showImage"</span>&gt;获取二维码&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Modal</span></span><br><span class="line"><span class="regexp">        v-model="modal"</span></span><br><span class="line"><span class="regexp">        title="经济人二维码"</span></span><br><span class="line"><span class="regexp">        &gt;</span></span><br><span class="line"><span class="regexp">        &lt;div class="code-img"&gt;</span></span><br><span class="line"><span class="regexp">          &lt;vue-qr  ref="Qrcode" :text="qrCodeConfig.text" :download="downloadFilename" :margin="10" :size="200" :dotScale="qrCodeConfig.dotScale" :colorDark="qrCodeConfig.colorDark"&gt;&lt;/</span>vue-qr&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div slot="footer"&gt;</span></span><br><span class="line"><span class="regexp">          &lt;Button type="primary" @click="downloadImg"&gt;下载二维码&lt;/</span>Button&gt;</span><br><span class="line">          &lt;Button type=<span class="string">"primary"</span> @click=<span class="string">"modal = !modal"</span>&gt;关闭&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;<span class="regexp">/Modal&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import VueQr from 'vue-qr'</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  name: 'Fullscreen',</span></span><br><span class="line"><span class="regexp">  components: &#123;</span></span><br><span class="line"><span class="regexp">    VueQr</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  data()&#123;</span></span><br><span class="line"><span class="regexp">    let id = this.$store.state.user.userId;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">      modal : false,</span></span><br><span class="line"><span class="regexp">      qrCodeConfig: &#123;</span></span><br><span class="line"><span class="regexp">        text: 'http:/</span><span class="regexp">/121.40.122.152:8080/</span>register?parent_id=<span class="string">'+id,</span></span><br><span class="line"><span class="string">        dotScale: 0.9,</span></span><br><span class="line">        colorDark: '#663300'</span><br><span class="line">      &#125;,</span><br><span class="line">      downloadFilename:<span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    showImage (sid, key, index) &#123;</span><br><span class="line">        <span class="keyword">this</span>.modal = <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    downloadImg () &#123;</span><br><span class="line">          <span class="keyword">const</span> iconUrl = <span class="keyword">this</span>.$refs.Qrcode.$el.src</span><br><span class="line">          <span class="keyword">let</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>)</span><br><span class="line">          <span class="keyword">let</span> event = <span class="keyword">new</span> MouseEvent(<span class="string">'click'</span>)</span><br><span class="line">          a.download = <span class="string">'二维码'</span></span><br><span class="line">          a.href = iconUrl</span><br><span class="line">          a.dispatchEvent(event)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style lang="less" scoped&gt;</span></span><br><span class="line"><span class="regexp">  .code-img&#123;</span></span><br><span class="line"><span class="regexp">    text-align: center;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注：</font>转载于：<a href="https://segmentfault.com/a/1190000020531910" target="_blank" rel="noopener">https://segmentfault.com/a/1190000020531910</a></p>
+<hr>
+<h4 id="12-vue-qr生成带logo和背景图片的二维码"><a href="#12-vue-qr生成带logo和背景图片的二维码" class="headerlink" title="12. vue-qr生成带logo和背景图片的二维码"></a>12. <font color="#00AAF0">vue-qr生成带logo和背景图片的二维码</font></h4><p>vue-qr一款可以生成带logo和背景图片二维码的vue前端插件，功能强大但使用简单，你可以使用该插件生成各种漂亮的二维码图片。</p>
+<p><strong>官方网站：</strong></p>
+<p><a href="https://github.com/Binaryify/vue-qr" target="_blank" rel="noopener">https://github.com/Binaryify/vue-qr</a></p>
+<p><strong>npm下载：</strong></p>
+<p><code>npm install vue-qr --save</code></p>
+<p><strong>本站下载：</strong></p>
+<p><a href="https://img1.itxst.com/3/a/3ae4669ae08ed13ef0b7000adff9d2ee.zip" target="_blank" rel="noopener">下载vue-qr文件</a></p>
+<p><strong>运行效果：</strong></p>
+<p><img src="https://img1.itxst.com/c/3/c3b511cc6ab32e7e6c9bcdc4c80c76c8.png" alt="img">   <img src="https://img1.itxst.com/9/2/929eb503addee20abb17fd03f7fa7a51.png" alt="img">   <img src="https://img1.itxst.com/c/3/c399e31c1c65d883bf2aba689488617c.png" alt="img"></p>
+<p><strong>VUE完整代码：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">  &lt;vue-qr :text=<span class="string">"ops.text"</span>  :logoSrc=<span class="string">"ops.logoSrc"</span> :binarize=<span class="string">"ops.binarize"</span></span><br><span class="line">   :binarizeThreshold=<span class="string">"ops.binarizeThreshold"</span> :colorDark=<span class="string">"ops.colorDark"</span> </span><br><span class="line">   :autoColor=<span class="string">"ops.autoColor"</span> :size=<span class="string">"ops.size"</span>  :dotScale=<span class="string">"ops.dotScale"</span>   </span><br><span class="line">   :bgcale=<span class="string">"ops.bgcale"</span> :bgSrc=<span class="string">"ops.bgSrc"</span> qid=<span class="string">"itxst.com"</span>&gt;&lt;<span class="regexp">/vue-qr&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/导入vue和vue-qrcode</span></span><br><span class="line"><span class="regexp">import Vue from "vue";</span></span><br><span class="line"><span class="regexp">import VueQr from 'vue-qr';</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/注册vue-qrcode组件</span></span><br><span class="line"><span class="regexp">Vue.component(VueQr.name, VueQr);</span></span><br><span class="line"><span class="regexp"> </span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  name: "App",</span></span><br><span class="line"><span class="regexp">  data() &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;  </span></span><br><span class="line"><span class="regexp">       ops:&#123;</span></span><br><span class="line"><span class="regexp">         /</span><span class="regexp">/二维码内容</span></span><br><span class="line"><span class="regexp">         text:'http:/</span><span class="regexp">/www.itxst.com',</span></span><br><span class="line"><span class="regexp">         /</span><span class="regexp">/logo图标</span></span><br><span class="line"><span class="regexp">         logoSrc:'http:/</span><span class="regexp">/192.168.2.103:8080/</span>logo.png<span class="string">',</span></span><br><span class="line"><span class="string">         //autoColor未false,二维码数据点的颜色</span></span><br><span class="line">         colorDark:'#007bff',</span><br><span class="line">         <span class="comment">//二维码数据点的速率比，默认未0.35</span></span><br><span class="line">         dotScale:<span class="number">0.3</span>,</span><br><span class="line">         <span class="comment">//背景图的速率比</span></span><br><span class="line">         bgcale:<span class="number">0.8</span>,</span><br><span class="line">         <span class="comment">//二维码背景图</span></span><br><span class="line">         bgSrc:<span class="string">'http://192.168.2.103:8080/bg0.png'</span>,</span><br><span class="line">         <span class="comment">//二维码数据点的颜色是否自动生成颜色</span></span><br><span class="line">         autoColor:<span class="literal">true</span>,</span><br><span class="line">         <span class="comment">//二值化</span></span><br><span class="line">         binarize:<span class="literal">false</span>,</span><br><span class="line">         <span class="comment">//二值化值</span></span><br><span class="line">         binarizeThreshold:<span class="number">130</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">  </span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="☆属性说明☆："><a href="#☆属性说明☆：" class="headerlink" title="☆属性说明☆："></a>☆属性说明☆：</h5><table>
+<thead>
+<tr>
+<th align="left">属性名称</th>
+<th align="left">属性说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">text</td>
+<td align="left">二维码内容</td>
+</tr>
+<tr>
+<td align="left">correctLevel</td>
+<td align="left">容错级别 0-3</td>
+</tr>
+<tr>
+<td align="left">size</td>
+<td align="left">二维码宽度和高度,比如120</td>
+</tr>
+<tr>
+<td align="left">margin</td>
+<td align="left">二维码内容距离边距的大小</td>
+</tr>
+<tr>
+<td align="left">colorDark</td>
+<td align="left">二维码数据点的颜色，如#3089dc，autoColor为true时无效</td>
+</tr>
+<tr>
+<td align="left">colorLight</td>
+<td align="left">空白区域的颜色，autoColor为true时无效</td>
+</tr>
+<tr>
+<td align="left">bgSrc</td>
+<td align="left">二维码背景图，通常和dotScale搭配使用</td>
+</tr>
+<tr>
+<td align="left">gifBgSrc</td>
+<td align="left">gif作为背景图，设置gifBgSrc后bgSrc无效</td>
+</tr>
+<tr>
+<td align="left">backgroundColor</td>
+<td align="left">背景颜色</td>
+</tr>
+<tr>
+<td align="left">backgroundDimming</td>
+<td align="left">.叠加在背景图上的颜色, 解码难时有帮助</td>
+</tr>
+<tr>
+<td align="left">logoSrc</td>
+<td align="left">二维码中间的logo的url地址</td>
+</tr>
+<tr>
+<td align="left">logoScale</td>
+<td align="left">计算logo大小的值,太大将导致解码失败, 计算公式 logoScale<em>(size-2</em>margin), 默认为 0.2</td>
+</tr>
+<tr>
+<td align="left">logoMargin</td>
+<td align="left">logo距离周边的位置，默认为0</td>
+</tr>
+<tr>
+<td align="left">logoBackgroundColor</td>
+<td align="left">当logoMargin不为0时，空白区域的颜色</td>
+</tr>
+<tr>
+<td align="left">logoCornerRadius</td>
+<td align="left">logo的圆角大小，默认为0</td>
+</tr>
+<tr>
+<td align="left">whiteMargin</td>
+<td align="left">如设置为true将会绘制白边</td>
+</tr>
+<tr>
+<td align="left">dotScale</td>
+<td align="left">二维码数据点的缩小比例，默认为0.35，如果背景图片不清晰可以缩小这个值</td>
+</tr>
+<tr>
+<td align="left">autoColor</td>
+<td align="left">是否把背景图片的主色作为数据点的颜色</td>
+</tr>
+<tr>
+<td align="left">binarize</td>
+<td align="left">若为 true, 图像将被二值化处理,</td>
+</tr>
+<tr>
+<td align="left">binarizeThreshold</td>
+<td align="left">默认 128. (0 &lt; threshold &lt; 255) 二值化处理的阈值</td>
+</tr>
+<tr>
+<td align="left">callback</td>
+<td align="left">生成成功的回调函数，第一个参数为二维码 data URL, 第二个参数为 props 传过来的 qid，因为是异步生成，所以需要用到qid</td>
+</tr>
+<tr>
+<td align="left">bindElement</td>
+<td align="left">默认true,否需要自动将生成的二维码绑定到HTML上。</td>
+</tr>
+</tbody></table>
+<p><strong>UMD方式：</strong></p>
+<p>umd就是通过浏览器直接引用url的方式，需要注的时logo图片和二维码背景图片必须和网页在同一个域名下面否则会有跨域问题，只能生成二维码而无法显示图片和logo</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span> /&gt;</span><br><span class="line">    &lt;title&gt;vue-qr生成彩色二维码例子&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script src="https:/</span><span class="regexp">/www.itxst.com/</span>package/vue/vue.min.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//www.itxst.com/package/vue-qr/vue-qr.js"&gt;&lt;/script&gt;</span></span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body style="padding:10px;"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div id="app"&gt;</span></span><br><span class="line"><span class="regexp">   &lt;vue-qr :text="ops.text"  :logoSrc="ops.logoSrc" :binarize="ops.binarize" </span></span><br><span class="line"><span class="regexp">   :binarizeThreshold="ops.binarizeThreshold" :colorDark="ops.colorDark" </span></span><br><span class="line"><span class="regexp">   :autoColor="ops.autoColor" :size="ops.size"  :dotScale="ops.dotScale" </span></span><br><span class="line"><span class="regexp">     :bgcale="ops.bgcale" :bgSrc="ops.bgSrc" qid="testid"&gt;&lt;/</span>vue-qr&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/注册vue-qr组件</span></span><br><span class="line"><span class="regexp">        Vue.component(window["vue-qr"].name, window["vue-qr"]);</span></span><br><span class="line"><span class="regexp">        var app = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">            el: '#app',</span></span><br><span class="line"><span class="regexp">            data() &#123;</span></span><br><span class="line"><span class="regexp">                return &#123; </span></span><br><span class="line"><span class="regexp">                   ops:&#123;</span></span><br><span class="line"><span class="regexp">                             /</span><span class="regexp">/二维码内容</span></span><br><span class="line"><span class="regexp">                             text:'http:/</span><span class="regexp">/www.itxst.com',</span></span><br><span class="line"><span class="regexp">                             /</span><span class="regexp">/logo图标 注意必须图片和网页在同一个域名下面</span></span><br><span class="line"><span class="regexp">                             logoSrc:'https:/</span><span class="regexp">/www.itxst.com/</span>package/vue-qr/logo.png<span class="string">',</span></span><br><span class="line"><span class="string">                             //autoColor未false,二维码数据点的颜色</span></span><br><span class="line">                             colorDark:'#007bff',</span><br><span class="line">                             <span class="comment">//二维码数据点的速率比，默认未0.35</span></span><br><span class="line">                             dotScale:<span class="number">0.3</span>,</span><br><span class="line">                             <span class="comment">//背景图的速率比</span></span><br><span class="line">                             bgcale:<span class="number">0.8</span>,</span><br><span class="line">                             <span class="comment">//二维码背景图  注意必须图片和网页在同一个域名下面</span></span><br><span class="line">                             bgSrc:<span class="string">'https://www.itxst.com/package/vue-qr/bg0.png'</span>,</span><br><span class="line">                             <span class="comment">//二维码数据点的颜色是否自动生成颜色</span></span><br><span class="line">                             autoColor:<span class="literal">true</span>,</span><br><span class="line">                             <span class="comment">//二值化</span></span><br><span class="line">                             binarize:<span class="literal">false</span>,</span><br><span class="line">                             <span class="comment">//二值化值</span></span><br><span class="line">                             binarizeThreshold:<span class="number">130</span></span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注：</font>转载于：<a href="https://www.itxst.com/qrcodejs/fmmvyaer.html" target="_blank" rel="noopener">https://www.itxst.com/qrcodejs/fmmvyaer.html</a></p>
+<hr>
+<h4 id="13-Vue项目中用Audio实现语音的播放"><a href="#13-Vue项目中用Audio实现语音的播放" class="headerlink" title="13. Vue项目中用Audio实现语音的播放"></a>13. <font color="#00AAF0">Vue项目中用Audio实现语音的播放</font></h4><p>跟据项目的需求，有些时候我们需要实现，通过后台获取语音流，然后网页进行语音播放，在网页播放语音就可以避免用户的本地语音库的安装。</p>
+<p><strong>从后台获取语音流，生成Audio标签并赋值</strong><br> 这里我用了axios请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">getAudio() &#123;</span><br><span class="line">    <span class="keyword">this</span>.$axios(&#123;</span><br><span class="line">        url: <span class="string">"api/system/tts"</span>,<span class="comment">//获取语音流的api</span></span><br><span class="line">        data: &#123; data&#125;,<span class="comment">//这个是给后台传送需要播放的语音信息</span></span><br><span class="line">        method: <span class="string">"post"</span>,</span><br><span class="line">        responseType: <span class="string">"blob"</span><span class="comment">//后台返回的为语音的流数据</span></span><br><span class="line">    &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> url = URL.createObjectURL(res.data);<span class="comment">//通过这个API让语音数据转为成一个url地址</span></span><br><span class="line">        <span class="keyword">let</span> audio = <span class="keyword">new</span> Audio();<span class="comment">//在VUE中使用audio标签</span></span><br><span class="line">        audio.src = url;<span class="comment">//设置audio的src为上面生成的url</span></span><br><span class="line">        <span class="keyword">let</span> playPromiser = audio.play();<span class="comment">//进行播放</span></span><br><span class="line">        <span class="comment">//在谷歌内核中,audio.play()会返回一个promise的值，在IE内核中就不会返回任何的值</span></span><br><span class="line">        <span class="comment">//所以如果你要分浏览器，可以判断playPromiser的值来进行操作哦</span></span><br><span class="line">        audio.onended = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">//onended可以检测语音是否播完</span></span><br><span class="line">            <span class="comment">//dosometing</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思路就是向后台发送需要播放的语音信息(文字),然后后台返回给你的语音流数据,通过URL.createObjectURL(data) 这个API生成一个URL，然后给audio标签附上url。</p>
+<p><strong>防止因为快速的请求语音数据造成语音播放叠在一起</strong><br> 上面的方法是获取语音并播放，有时候用户会进行多次点击或请求，然后语音就会叠在一起播放，那就炸了(这里其实可以让后端做一个排队的队列，一个一个播,这里我前端也做了一个排队队列)</p>
+<p> 对上面的方法进行改造改造</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">getAudio() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.callmsg.length &gt; <span class="number">0</span>) &#123;<span class="comment">//如果队列是有人在排队的，这进行播放操作</span></span><br><span class="line">        <span class="keyword">this</span>.$axios(&#123;</span><br><span class="line">            url: <span class="string">"api/system/tts"</span>,</span><br><span class="line">            data: &#123; data &#125;,</span><br><span class="line">            method: <span class="string">"post"</span>,</span><br><span class="line">            responseType: <span class="string">"blob"</span></span><br><span class="line">        &#125;)</span><br><span class="line">            .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> url = URL.createObjectURL(res.data);</span><br><span class="line">            <span class="keyword">let</span> audio = <span class="keyword">new</span> Audio();</span><br><span class="line">            audio.src = url;</span><br><span class="line">            <span class="keyword">let</span> playPromiser = audio.play();</span><br><span class="line">            localStorage.setItem(<span class="string">"audio"</span>, <span class="string">"1"</span>);<span class="comment">//在这里我用一个标志，设置语音开始播放</span></span><br><span class="line">            audio.onended = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.callmsg.splice(<span class="number">0</span>, <span class="number">1</span>);<span class="comment">//队列的第一个播放完毕，所以删除</span></span><br><span class="line">                localStorage.setItem(<span class="string">"audio"</span>, <span class="string">"0"</span>);<span class="comment">//这里是语音播放完毕</span></span><br><span class="line">                <span class="keyword">this</span>.getAudio();<span class="comment">//进行下一个请求并播放</span></span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;)</span><br><span class="line">            .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;&#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//this.audio是一个data数据,用来记录是否有人排队</span></span><br><span class="line">        <span class="keyword">this</span>.audio = <span class="literal">true</span>; <span class="comment">//如果队列没人排队，就告诉外面已经读完啦</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 下面是用户的操作，就是触发播放函数的地方</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.callmsg.push(data);<span class="comment">//this.callmsg就是排队队列,点击一次，放进去一个需要播放的信息</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">this</span>.audio) &#123;<span class="comment">//如果没人</span></span><br><span class="line">    <span class="keyword">this</span>.audio = <span class="literal">false</span>;<span class="comment">//改为有人排队了</span></span><br><span class="line">    <span class="keyword">this</span>.getAudio();<span class="comment">//进行播放操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一开始的this.audio设置为true</p>
+<p>思路是一开始为没人，需要播放信息时，将标志设置为有人，并向队列里面加入数据，然后进行请求，如果在播放中途有新的信息需要播放，就会再插入，但是标志不变，所以上面的递归函数会继续执行，直到队列为空，标志就会改回来。</p>
+<p><strong>附：<code>Vue-cli</code>具体需求实现的</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">getAudio () &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.orderList.soundRecordingEvaluation) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">this</span>.audio = <span class="keyword">new</span> Audio()</span><br><span class="line">    <span class="keyword">this</span>.audio.src = <span class="keyword">this</span>.orderList.soundRecordingEvaluation.fileUrl</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.audio.duration)</span><br><span class="line">    <span class="keyword">this</span>.audioDuration = <span class="built_in">parseFloat</span>(<span class="keyword">this</span>.audio.duration)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">handlePlayAudio () &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.audio) &#123;</span><br><span class="line">        <span class="keyword">this</span>.isPlay = !<span class="keyword">this</span>.isPlay</span><br><span class="line">        <span class="comment">// const audio = new Audio()</span></span><br><span class="line">        <span class="comment">// audio.src = this.orderList.soundRecordingEvaluation.fileUrl</span></span><br><span class="line">        <span class="keyword">this</span>.isPlay ? <span class="keyword">this</span>.audio.play() : <span class="keyword">this</span>.audio.pause()</span><br><span class="line">        <span class="comment">// console.log(this.audio.duration)</span></span><br><span class="line">        <span class="comment">// 监听录音是否停止播放</span></span><br><span class="line">        <span class="keyword">this</span>.audio.onended = <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">this</span>.isPlay = <span class="literal">false</span> &#125;</span><br><span class="line">        <span class="comment">// this.audio.readyState</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止录音的播放</span></span><br><span class="line">stopPlayAudio () &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.audio &amp;&amp; <span class="keyword">this</span>.isPlay) &#123;</span><br><span class="line">        <span class="keyword">this</span>.isPlay = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">this</span>.audio.pause()</span><br><span class="line">        <span class="keyword">this</span>.audio = <span class="string">''</span></span><br><span class="line">        <span class="keyword">this</span>.audio.duration = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注：</font>转载于：<a href="https://blog.csdn.net/qq_41844169/article/details/101028469" target="_blank" rel="noopener">https://blog.csdn.net/qq_41844169/article/details/101028469</a></p>
+<hr>
+<h4 id="14-vue中设置内联样式style-动态绑定背景图backgroundimage不生效问题，以及动态绑定img的src-图片无法显示问题"><a href="#14-vue中设置内联样式style-动态绑定背景图backgroundimage不生效问题，以及动态绑定img的src-图片无法显示问题" class="headerlink" title="14. vue中设置内联样式style 动态绑定背景图backgroundimage不生效问题，以及动态绑定img的src,图片无法显示问题"></a>14. <font color="#00AAF0">vue中设置内联样式style 动态绑定背景图backgroundimage不生效问题，以及动态绑定img的src,图片无法显示问题</font></h4><p>（以下情况是通过style设置内联样式以及动态绑定img的src时发生的问题，.在外部css文件和style标签里面定义的样式不会出现以下问题）<br>我们可能会通过以下这种方式来设置元素的背景（注意元素需设置宽高，或者元素里有内容支撑）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style&#x3D;&quot;background-image: url(&#39;.&#x2F;source&#x2F;告白气球.jpg&#39;);&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200725105920520.png" alt="img"></p>
+<p>使用vue-cli创建项目后，使用以下三种方式设置背景样式时，第一种方式无法生效，后面两种方式OK，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style&#x3D;&quot;background-image: url(&#39;@&#x2F;assets&#x2F;logo.png&#39;);&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div :style&#x3D;&quot;&#123;&#39;background-image&#39;: &#39;url(&#39; + require(&#39;@&#x2F;assets&#x2F;logo.png&#39;) + &#39;)&#39; &#125;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div :style&#x3D;&quot;&#123;&#39;background-image&#39;: &#39;url(&#39; + bg + &#39;)&#39; &#125;&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200725110432728.png" alt="在这里插入图片描述"></p>
+<p>使用第一种方式时，无论这里用@/assets/logo.png，~@/assets/logo.png，…/assets/logo.png作为背景图片路径都无法成功，这里确定，图片路径是没有问题的</p>
+<p><img src="https://img-blog.csdnimg.cn/20200725110616120.png" alt="在这里插入图片描述"></p>
+<p>我们来看一下，在浏览器中对应的标签和样式是怎么样的</p>
+<p><img src="https://img-blog.csdnimg.cn/20200725110801485.png" alt="在这里插入图片描述"></p>
+<p>可以看到，第一个div标签的背景图片路径还是和之前设置的一样，而后面两个的路径都发生了相应的改变，由此可见，当项目打包后，下面两种方式都将路径解析成打包后的对应路径了，而第一种情况并没有发生改变，再去访问这个路径当然就访问不到了。所以如果我们需要使用style来动态绑定背景图的时候，可以使用下面两种方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div :style&#x3D;&quot;&#123;&#39;background-image&#39;: &#39;url(&#39; + bg + &#39;)&#39; &#125;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                bg: require(&#39;@&#x2F;assets&#x2F;logo.png&#39;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20200725115412528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpbmdsaXUwODI0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>动态绑定img的src时也可以使用以上两种方法来解决图片路径不对而导致的图片不显示问题</p>
+<p><font color="red">注：</font>转载于：<a href="https://blog.csdn.net/lingliu0824/article/details/107575676" target="_blank" rel="noopener">https://blog.csdn.net/lingliu0824/article/details/107575676</a></p>
+<hr>
+<h4 id="15-Antdesign-Table-更改-columns-列的-css-属性"><a href="#15-Antdesign-Table-更改-columns-列的-css-属性" class="headerlink" title="15. Antdesign Table 更改 columns 列的 css 属性"></a>15. <font color="#00AAF0">Antdesign Table 更改 columns 列的 css 属性</font></h4><p>我这里使用了antd封装的<code>S-Table</code>组件，但是官方组件API只提供了row的css更改，而列的css更改需要在各自columns的对象中自定义类名。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">const</span> columns = [</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'姓名'</span>,</span><br><span class="line">        dataIndex: <span class="string">'name'</span>,</span><br><span class="line">        className: <span class="string">'name-colum'</span> <span class="comment">// 自定义某一列的css去修改样式</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp">   .name-colum &#123;</span></span><br><span class="line"><span class="regexp">       background-color: 'red';</span></span><br><span class="line"><span class="regexp">   &#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果这样不行的话，可能由于table的私有属性影响了css属性渲染，这时可能需要你手动去穿透组件的css属性：(<code>::v-deep</code>、<code>/deep/</code>、<code>!important</code>)</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">   <span class="selector-pseudo">::v-deep</span> <span class="selector-class">.name-colum</span> &#123;</span><br><span class="line">       <span class="attribute">background-color</span>: <span class="string">'red'</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>!important</code>我没有试过，不知道能不能穿透它的组件，有兴趣的小伙伴可以试试。</p>
+<hr>
+<h4 id="16-Maximum-call-stack-size-exceeded-错误解决"><a href="#16-Maximum-call-stack-size-exceeded-错误解决" class="headerlink" title="16. Maximum call stack size exceeded 错误解决"></a>16. <font color="#00AAF0">Maximum call stack size exceeded 错误解决</font></h4><p><img src="https://img-blog.csdnimg.cn/20210602100657962.png" alt="在这里插入图片描述"></p>
+<p><strong>这个的意思就是你【超出最大调用堆栈大小】</strong></p>
+<p>是以为在给属性赋值的时候会改变起始对象(也就是对象自身)也就是浅拷贝，栈内存中假设我们a复制了b，b里面的数据对应的是堆内存数据一。我们进行拷贝后a对应的堆内存还是数据一。当堆内存数据一发生改变那a,b自然都会变的。所以我这里就会导致无限嵌套。自然就抛出了这个问题。</p>
+<blockquote>
+<p><strong>解决办法：</strong></p>
+<p>就是我们要使用深拷贝。可以用json转换一遍就可以解决这个问题。jq的<code>extend</code>也是可以</p>
+</blockquote>
+<hr>
+<h4 id="17-video-js-插件的参数解释"><a href="#17-video-js-插件的参数解释" class="headerlink" title="17. video.js 插件的参数解释"></a>17. <font color="#00AAF0">video.js 插件的参数解释</font></h4><h5 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a><strong>初始化</strong></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- vjs-big-play-centered可使大的播放按钮居住，vjs-fluid可使视频占满容器 --&gt;</span><br><span class="line">&lt;video id=<span class="string">"myVideo"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"video-js vjs-big-play-centered vjs-fluid"</span>&gt;</span><br><span class="line">  &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"vjs-no-js"</span>&gt;</span><br><span class="line">    To view <span class="keyword">this</span> video please enable JavaScript, and consider upgrading to a</span><br><span class="line">    web browser that</span><br><span class="line">    &lt;a href=<span class="string">"https://videojs.com/html5-video-support/"</span> target=<span class="string">"_blank"</span>&gt;</span><br><span class="line">      supports HTML5 video</span><br><span class="line">    &lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>p&gt;</span><br><span class="line">&lt;<span class="regexp">/video&gt;</span></span><br><span class="line"><span class="regexp">var player = videojs(document.getElementById('myVideo'), &#123;</span></span><br><span class="line"><span class="regexp">  controls: true, /</span><span class="regexp">/ 是否显示控制条</span></span><br><span class="line"><span class="regexp">  poster: 'xxx', /</span><span class="regexp">/ 视频封面图地址</span></span><br><span class="line"><span class="regexp">  preload: 'auto',</span></span><br><span class="line"><span class="regexp">  autoplay: false,</span></span><br><span class="line"><span class="regexp">  fluid: true, /</span><span class="regexp">/ 自适应宽高</span></span><br><span class="line"><span class="regexp">  language: 'zh-CN', /</span><span class="regexp">/ 设置语言</span></span><br><span class="line"><span class="regexp">  muted: false, /</span><span class="regexp">/ 是否静音</span></span><br><span class="line"><span class="regexp">  inactivityTimeout: false,</span></span><br><span class="line"><span class="regexp">  controlBar: &#123; /</span><span class="regexp">/ 设置控制条组件</span></span><br><span class="line"><span class="regexp">    /</span>* 设置控制条里面组件的相关属性及显示与否</span><br><span class="line">    <span class="string">'currentTimeDisplay'</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="string">'timeDivider'</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="string">'durationDisplay'</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="string">'remainingTimeDisplay'</span>:<span class="literal">false</span>,</span><br><span class="line">    volumePanel: &#123;</span><br><span class="line">      inline: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">    /</span>* 使用children的形式可以控制每一个控件的位置，以及显示与否 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">    children: [</span></span><br><span class="line"><span class="regexp">      &#123;name: 'playToggle'&#125;, // 播放按钮</span></span><br><span class="line"><span class="regexp">      &#123;name: 'currentTimeDisplay'&#125;, // 当前已播放时间</span></span><br><span class="line"><span class="regexp">      &#123;name: 'progressControl'&#125;, // 播放进度条</span></span><br><span class="line"><span class="regexp">      &#123;name: 'durationDisplay'&#125;, // 总时间</span></span><br><span class="line"><span class="regexp">      &#123; // 倍数播放</span></span><br><span class="line"><span class="regexp">        name: 'playbackRateMenuButton',</span></span><br><span class="line"><span class="regexp">        'playbackRates': [0.5, 1, 1.5, 2, 2.5]</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      &#123;</span></span><br><span class="line"><span class="regexp">        name: 'volumePanel', /</span><span class="regexp">/ 音量控制</span></span><br><span class="line"><span class="regexp">        inline: false, /</span><span class="regexp">/ 不使用水平方式</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">      &#123;name: 'FullscreenToggle'&#125; /</span><span class="regexp">/ 全屏</span></span><br><span class="line"><span class="regexp">  &#125;,</span></span><br><span class="line"><span class="regexp">  sources:[ // 视频源</span></span><br><span class="line"><span class="regexp">      &#123;</span></span><br><span class="line"><span class="regexp">          src: '//vjs.zencdn.net/v/oceans.mp4',</span></span><br><span class="line"><span class="regexp">          type: 'video/mp4',</span></span><br><span class="line"><span class="regexp">          poster: '//vjs.zencdn.net/v/oceans.png'</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">  ]</span></span><br><span class="line"><span class="regexp">&#125;, function ()&#123;</span></span><br><span class="line"><span class="regexp">  console.log('视频可以播放了',this)</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="CONTROLBAR组件的说明"><a href="#CONTROLBAR组件的说明" class="headerlink" title="CONTROLBAR组件的说明"></a><strong>CONTROLBAR组件的说明</strong></h5><ul>
+<li><code>playToggle</code>     // 播放暂停按钮</li>
+<li><code>volumeMenuButton</code>     // 音量控制</li>
+<li><code>currentTimeDisplay</code>     // 当前播放时间</li>
+<li><code>timeDivider</code>      // ‘/‘ 分隔符</li>
+<li><code>durationDisplay</code>      // 总时间</li>
+<li><code>progressControl</code>      // 点播流时，播放进度条，seek控制</li>
+<li><code>liveDisplay</code>      // 直播流时，显示LIVE</li>
+<li><code>remainingTimeDisplay</code>      // 当前播放时间</li>
+<li><code>playbackRateMenuButton</code>      // 播放速率，当前只有html5模式下才支持设置播放速率</li>
+<li><code>fullscreenToggle</code>      // 全屏控制</li>
+</ul>
+<p><img src="https://www.freesion.com/images/81/214b66cee03e1bc171bfd201cd84b5c9.png" alt="img"></p>
+<h5 id="动态切换视频"><a href="#动态切换视频" class="headerlink" title="动态切换视频"></a>动态切换视频</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;</span><br><span class="line">    src: <span class="string">'xxx.mp4'</span>,</span><br><span class="line">    type: <span class="string">'video/mp4'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> player = videojs(<span class="string">'myVideo'</span>, &#123;...&#125;)</span><br><span class="line">                                 player.pause()</span><br><span class="line">player.src(data)</span><br><span class="line">player.load(data)</span><br><span class="line"><span class="comment">// 动态切换poster</span></span><br><span class="line">player.posterImage.setSrc(<span class="string">'xxx.jpg'</span>)</span><br><span class="line">player.play()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁videojs</span></span><br><span class="line"><span class="comment">//player.dispose()</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="设置语言（传统开发，VUE开发）"><a href="#设置语言（传统开发，VUE开发）" class="headerlink" title="设置语言（传统开发，VUE开发）"></a>设置语言（传统开发，VUE开发）</h5><h6 id="传统开发"><a href="#传统开发" class="headerlink" title="传统开发"></a><strong>传统开发</strong></h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"//example.com/path/to/lang/es.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script src="/</span><span class="regexp">/example.com/</span>path/to/lang/zh-CN.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;script src="</span><span class="comment">//example.com/path/to/lang/zh-TW.js"&gt;&lt;/script&gt;</span></span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> player = videojs(<span class="string">'myVideo'</span>, &#123;</span><br><span class="line">    language: <span class="string">'zh-CN'</span> <span class="comment">// 初始化时设置语言，立即生效</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* 动态切换语言</span></span><br><span class="line"><span class="comment">  使用这种方式进行动态切换不会立即生效，必须有所操作后才会生效。如播放按钮，必须点击一次播放按钮后播放按钮的提示文字才会改变  </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//player.language('zh-TW');</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="VUE开发"><a href="#VUE开发" class="headerlink" title="VUE开发"></a><strong>VUE开发</strong></h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Video <span class="keyword">from</span> <span class="string">'video.js'</span></span><br><span class="line"><span class="comment">/* 不能直接引入js，否则会报错：videojs is not defined </span></span><br><span class="line"><span class="comment">import 'video.js/dist/lang/zh-CN.js' */</span></span><br><span class="line"><span class="keyword">import</span> video_zhCN <span class="keyword">from</span> <span class="string">'video.js/dist/lang/zh-CN.json'</span></span><br><span class="line"><span class="keyword">import</span> video_en <span class="keyword">from</span>  <span class="string">'video.js/dist/lang/en.json'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'video.js/dist/video-js.css'</span></span><br><span class="line"> </span><br><span class="line">Video.addLanguage(<span class="string">'zh-CN'</span>, video_zhCN);</span><br></pre></td></tr></table></figure>
+
+<h5 id="解决在IPHONE中播放时自动全屏问题"><a href="#解决在IPHONE中播放时自动全屏问题" class="headerlink" title="解决在IPHONE中播放时自动全屏问题"></a>解决在IPHONE中播放时自动全屏问题</h5><p>视频在微信点击播放时，会以模态框弹出再播放。</p>
+<p>解决办法就是在<code>video</code>标签中添加<code>playsinline=&quot;true&quot;</code>属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;video</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    webkit-playsinline=<span class="string">"true"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    playsinline=<span class="string">"true"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"video-js vjs-big-play-centered vjs-fluid"</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/video&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用事件：</strong></p>
+<p>  播放 this.play()</p>
+<p>  停止 – video没有stop方法，可以用pause 暂停获得同样的效果</p>
+<p>  暂停 this.pause()</p>
+<p>  销毁 this.dispose()</p>
+<p>  监听 this.on(‘click‘,fn)</p>
+<p>  触发事件this.trigger(‘dispose‘)</p>
+<h5 id="OPTIONS参数："><a href="#OPTIONS参数：" class="headerlink" title="OPTIONS参数："></a><strong>OPTIONS参数：</strong></h5><p><strong>autoplay</strong></p>
+<blockquote>
+<p>类型： boolean；</p>
+<p>如果true/作为属性存在，则在播放器准备就绪时开始播放。</p>
+</blockquote>
+<p><strong>controls</strong></p>
+<blockquote>
+<p>类型： boolean<br>确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。</p>
+</blockquote>
+<p><strong>width</strong></p>
+<blockquote>
+<p>类型： string|number<br>设置视频播放器的显示宽度（以像素为单位）。</p>
+</blockquote>
+<p><strong>height</strong></p>
+<blockquote>
+<p>类型： string|number<br>设置视频播放器的显示高度（以像素为单位）。</p>
+</blockquote>
+<p><strong>loop</strong></p>
+<blockquote>
+<p>类型： boolean<br>使视频一结束就重新开始。</p>
+</blockquote>
+<p><strong>muted</strong></p>
+<blockquote>
+<p>类型： boolean<br>默认情况下会静音任何音频。</p>
+</blockquote>
+<p><strong>poster</strong></p>
+<blockquote>
+<p>类型： string<br>在视频开始播放之前显示的图像的URL。这通常是视频的框架或自定义标题屏幕。一旦用户点击“播放”，图像就会消失。</p>
+</blockquote>
+<p><strong>preload</strong></p>
+<blockquote>
+<p>类型： string<br>建议浏览器是否应在加载元素后立即开始下载视频数据。支持的值是：<br>‘auto’<br>立即开始加载视频（如果浏览器支持）。某些移动设备不会预加载视频，以保护用户的带宽/数据使用。这就是为什么这个价值被称为’汽车’，而不是更具决定性的东西’true’。<br>这往往是最常见和推荐的值，因为它允许浏览器选择最佳行为。<br>‘metadata’<br>仅加载视频的元数据，其中包括视频的持续时间和尺寸等信息。有时，元数据将通过下载几帧视频来加载。<br>‘none’<br>不要预加载任何数据。浏览器将等待用户点击“播放”开始下载。</p>
+</blockquote>
+<p> <strong>src</strong></p>
+<blockquote>
+<p>类型： string<br>要嵌入的视频源的源URL。</p>
+</blockquote>
+<h5 id="VIDEO-JS特定的参数"><a href="#VIDEO-JS特定的参数" class="headerlink" title="VIDEO.JS特定的参数"></a>VIDEO.JS特定的参数</h5><p><strong>aspectRatio</strong></p>
+<blockquote>
+<p>类型： string<br>将播放器置于流体模式，并在计算播放器的动态大小时使用该值。该值应表示比率 - 由冒号（例如”16:9”或”4:3”）分隔的两个数字。</p>
+</blockquote>
+<p><strong>autoSetup</strong></p>
+<blockquote>
+<p>类型： boolean<br>阻止播放器为具有data-setup属性的媒体元素运行autoSetup 。</p>
+<p>注意：必须在与videojs.options.autoSetup = falsevideojs源加载生效的同一时刻全局设置。</p>
+</blockquote>
+<p><strong>children</strong></p>
+<blockquote>
+<p>类型： Array|Object<br>此选项继承自基Component类。</p>
+</blockquote>
+<p><strong>fluid</strong></p>
+<blockquote>
+<p>类型： boolean<br>何时true，Video.js播放器将具有流畅的大小。换句话说，它将扩展以适应其容器。</p>
+<p>此外，如果元素具有”vjs-fluid”，则此选项自动设置为true。</p>
+</blockquote>
+<p><strong>inactivityTimeout</strong></p>
+<blockquote>
+<p>类型： number<br>Video.js表示用户通过”vjs-user-active”和”vjs-user-inactive”类以及”useractive”事件与玩家进行交互。</p>
+<p>在inactivityTimeout决定了不活动的许多毫秒声明用户闲置之前是必需的。值为0表示没有inactivityTimeout，用户永远不会被视为非活动状态。</p>
+</blockquote>
+<p> <strong>language</strong></p>
+<blockquote>
+<p>键入：string，默认值：浏览器默认值或’en’<br>与播放器中的一种可用语言匹配的语言代码。这为播放器设置了初始语言，但始终可以更改。</p>
+<p>在Video.js中了解有关语言的更多信息。</p>
+</blockquote>
+<p><strong>languages</strong></p>
+<blockquote>
+<p>类型： Object<br>自定义播放器中可用的语言。此对象的键将是语言代码，值将是具有英语键和翻译值的对象。</p>
+<p>在Video.js中了解有关语言的更多信息</p>
+<p>注意：通常，不需要此选项，最好将自定义语言传递给videojs.addLanguage()所有玩家！</p>
+</blockquote>
+<p><strong>nativeControlsForTouch</strong></p>
+<blockquote>
+<p>类型： boolean<br>明确设置关联技术选项的默认值。</p>
+</blockquote>
+<p><strong>notSupportedMessage</strong></p>
+<blockquote>
+<p>类型： string<br>允许覆盖Video.js无法播放媒体源时显示的默认消息。</p>
+</blockquote>
+<p><strong>playbackRates</strong></p>
+<blockquote>
+<p>类型： Array<br>严格大于0的数字数组，其中1表示常速（100％），0.5表示半速（50％），2表示双速（200％）等。如果指定，Video.js显示控件（类vjs-playback-rate）允许用户从选择数组中选择播放速度。选项以从下到上的指定顺序显示。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">playbackRates: [<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">1.5</span>, <span class="number">2</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>plugins</strong></p>
+<blockquote>
+<p>类型： Object<br>这支持在初始化播放器时使用自定义选项自动初始化插件 - 而不是要求您手动初始化它们。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">plugins: &#123;</span><br><span class="line"> foo: &#123;<span class="attr">bar</span>: <span class="literal">true</span>&#125;,</span><br><span class="line"> boo: &#123;<span class="attr">baz</span>: <span class="literal">false</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上大致相当于： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player = videojs(<span class="string">'my-player'</span>);</span><br><span class="line"></span><br><span class="line">player.foo(&#123;<span class="attr">bar</span>: <span class="literal">true</span>&#125;);</span><br><span class="line">player.boo(&#123;<span class="attr">baz</span>: <span class="literal">false</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>虽然，由于plugins选项是对象，因此无法保证初始化顺序！</p>
+<p>有关Video.js插件的更多信息，请参阅插件指南。</p>
+</blockquote>
+<p><strong>sources</strong></p>
+<blockquote>
+<p>类型： Array</p>
+<p>一组对象，它们反映了本机元素具有一系列子元素的能力。这应该是带有src和type属性的对象数组。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">sources: [&#123;</span><br><span class="line"> src: <span class="string">'//path/to/video.mp4'</span>,</span><br><span class="line"> type: <span class="string">'video/mp4'</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line"> src: <span class="string">'//path/to/video.webm'</span>,</span><br><span class="line"> type: <span class="string">'video/webm'</span></span><br><span class="line">&#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用元素将具有相同的效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video ...&gt;</span><br><span class="line">&lt;source src=<span class="string">"//path/to/video.mp4"</span> type=<span class="string">"video/mp4"</span>&gt;</span><br><span class="line">&lt;source src=<span class="string">"//path/to/video.webm"</span> type=<span class="string">"video/webm"</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/video&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>techCanOverridePoster</strong></p>
+<blockquote>
+<p>类型： boolean</p>
+<p>使技术人员有可能覆盖玩家的海报并融入玩家的海报生命周期。当使用多个技术时，这可能很有用，每个技术都必须在播放新源时设置自己的海报。</p>
+</blockquote>
+<p><strong>techOrder</strong></p>
+<blockquote>
+<p>输入：Array，默认值：[‘html5’]</p>
+<p>定义Video.js技术首选的顺序。默认情况下，这意味着Html5首选技术。其他注册的技术将在此技术之后按其注册顺序添加。</p>
+</blockquote>
+<p><strong>vtt.js</strong></p>
+<blockquote>
+<p>类型： string</p>
+<p>允许覆盖vtt.js的默认URL，该URL可以异步加载到polyfill支持WebVTT。</p>
+<p>此选项将用于Video.js（即video.novtt.js）的“novtt”版本中。否则，vtt.js与Video.js捆绑在一起。</p>
+</blockquote>
+<h5 id="组件参数"><a href="#组件参数" class="headerlink" title="组件参数"></a>组件参数</h5><p><strong>children</strong></p>
+<blockquote>
+<p>类型： Array|Object</p>
+<p>如果Array- 这是默认值 - 这用于确定哪些子节点（按组件名称）以及在播放器（或其他组件）上创建它们的顺序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The following code creates a player with ONLY bigPlayButton and</span></span><br><span class="line"><span class="comment">// controlBar child components.</span></span><br><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">children: [</span><br><span class="line"> <span class="string">'bigPlayButton'</span>,</span><br><span class="line"> <span class="string">'controlBar'</span></span><br><span class="line">]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>该children选项还可以作为传递Object。在这种情况下，它用于提供options任何/所有孩子，包括禁用它们false：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This player's ONLY child will be the controlBar. Clearly, this is not the</span></span><br><span class="line"><span class="comment">// ideal method for disabling a grandchild!</span></span><br><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">children: &#123;</span><br><span class="line"> controlBar: &#123;</span><br><span class="line">   fullscreenToggle: <span class="literal">false</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>${componentName}</strong></p>
+<blockquote>
+<p>类型： Object</p>
+<p>可以通过组件名称的低驼峰案例变体（例如controlBarfor ControlBar）为组件提供自定义选项。这些可以嵌套在孙子关系的表示中。例如，要禁用全屏控件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">controlBar: &#123;</span><br><span class="line"> fullscreenToggle: <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>技术选择</p>
+</blockquote>
+<p><strong>${techName}</strong></p>
+<blockquote>
+<p>类型： Object</p>
+<p>Video.js回放技术（即“技术”）可以作为传递给该videojs功能的选项的一部分给予自定义选项。它们应该在技术名称的小写变体下传递（例如”flash”或”html5”）。</p>
+</blockquote>
+<p><strong>flash</strong></p>
+<blockquote>
+<p>swf<br>指定Video.js SWF文件在Flash技术位置的位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">videojs(<span class="string">'my-player'</span>, &#123;</span><br><span class="line">flash: &#123;</span><br><span class="line"> swf: <span class="string">'//path/to/videojs.swf'</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>但是，更改全局默认值通常更合适：</p>
+<p>videojs.options.flash.swf = ‘//path/to/videojs.swf’<br>html5</p>
+</blockquote>
+<p><strong>nativeControlsForTouch</strong></p>
+<blockquote>
+<p>类型： boolean</p>
+<p>只有技术支持Html5，此选项可以设置true为强制触摸设备的本机控件。</p>
+</blockquote>
+<p><strong>nativeAudioTracks</strong></p>
+<blockquote>
+<p>类型： boolean</p>
+<p>可以设置为false禁用本机音轨支持。最常用于videojs-contrib-hls。</p>
+</blockquote>
+<p><strong>nativeTextTracks</strong></p>
+<blockquote>
+<p>类型： boolean</p>
+<p>可以设置为false强制模拟文本轨道而不是本机支持。该nativeCaptions选项也存在，但只是一个别名nativeTextTracks、</p>
+</blockquote>
+<p><strong>nativeVideoTracks</strong></p>
+<blockquote>
+<p>类型： boolean</p>
+<p>可以设置为false禁用本机视频轨道支持。最常用于videojs-contrib-hls。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> options = &#123;&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> player = videojs(‘example_video_1‘, options, <span class="function"><span class="keyword">function</span> <span class="title">onPlayerReady</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  videojs.log(‘播放器已经准备好了!‘);</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// In this context, `this` is the player that was created by Video.js.&lt;br&gt;  // 注意，这个地方的上下文， `this` 指向的是Video.js的实例对像player</span></span><br><span class="line">  <span class="keyword">this</span>.play();</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// How about an event listener?&lt;br&gt;  // 如何使用事件监听？</span></span><br><span class="line">  <span class="keyword">this</span>.on(‘ended‘, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    videojs.log(‘播放结束了!‘);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注：</font>转载于：<a href="https://www.freesion.com/article/4875170880/" target="_blank" rel="noopener">https://www.freesion.com/article/4875170880/</a></p>
+<hr>
+<h4 id="0-共勉"><a href="#0-共勉" class="headerlink" title="0 共勉"></a>0 <font color="#00AAF0">共勉</font></h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2022/05/06/TypeScript/" rel="next" title="TypeScript">
+                <i class="fa fa-chevron-left"></i> TypeScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2022/08/04/Git/" rel="prev" title="Git">
+                Git <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/note/images/dog.jpg"
+                alt="F゛" />
+            
+              <p class="site-author-name" itemprop="name">F゛</p>
+              <p class="site-description motion-element" itemprop="description">study hard and make progress every day!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/note/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-表单校验时this-refs-xxx-validate-is-not-a-function"><span class="nav-number">1.</span> <span class="nav-text">1. 表单校验时this.$refs[xxx].validate is not a function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Vue-之qs-使用详解"><span class="nav-number">2.</span> <span class="nav-text">2. Vue 之qs 使用详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-warning-LF-will-be-replaced-by-CRLF-in-（）-的原因及解决办法"><span class="nav-number">3.</span> <span class="nav-text">3. warning: LF will be replaced by CRLF in （） 的原因及解决办法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-vantUI中修改NavBar-导航栏字体颜色"><span class="nav-number">4.</span> <span class="nav-text">4. vantUI中修改NavBar 导航栏字体颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-vue组件传参-props-default-数组／对象的默认值应当由一个工厂函数返回"><span class="nav-number">5.</span> <span class="nav-text">5. vue组件传参 props default 数组／对象的默认值应当由一个工厂函数返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Invalid-default-value-for-prop-“slides”-Props-with-type-Object-Array-must-use-a-factory-function-to-return-the-default-value-amp-amp-vue组件传参-props-default-数组／对象的默认值应当由一个工厂函数返回"><span class="nav-number">6.</span> <span class="nav-text">6. Invalid default value for prop “slides”: Props with type Object&#x2F;Array must use a factory function to return the default value &amp;&amp; vue组件传参 props default 数组／对象的默认值应当由一个工厂函数返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-vue中表单的this-refs-formname-validate不生效"><span class="nav-number">7.</span> <span class="nav-text">7. vue中表单的this.$refs[formname].validate不生效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-this-refs-ruleForm-validate-is-not-a-function"><span class="nav-number">8.</span> <span class="nav-text">8. this.$refs.ruleForm.validate is not a function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-VUE-生成二维码插件"><span class="nav-number">9.</span> <span class="nav-text">9.  VUE 生成二维码插件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、qrcodejs2"><span class="nav-number">9.1.</span> <span class="nav-text">1、qrcodejs2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、vue-qart"><span class="nav-number">9.2.</span> <span class="nav-text">2、vue-qart</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、-实际项目中"><span class="nav-number">9.3.</span> <span class="nav-text">3、 实际项目中</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-vue中使用vue-qr生成漂亮的二维码"><span class="nav-number">10.</span> <span class="nav-text">10. vue中使用vue-qr生成漂亮的二维码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装："><span class="nav-number">10.1.</span> <span class="nav-text">安装：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用："><span class="nav-number">10.2.</span> <span class="nav-text">使用：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数及说明："><span class="nav-number">10.3.</span> <span class="nav-text">参数及说明：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基础："><span class="nav-number">10.3.1.</span> <span class="nav-text">基础：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#颜色："><span class="nav-number">10.3.2.</span> <span class="nav-text">颜色：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#背景图像："><span class="nav-number">10.3.3.</span> <span class="nav-text">背景图像：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#logo图像："><span class="nav-number">10.3.4.</span> <span class="nav-text">logo图像：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#后处理："><span class="nav-number">10.3.5.</span> <span class="nav-text">后处理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-vue-qr生成并下载二维码"><span class="nav-number">11.</span> <span class="nav-text">11.  vue-qr生成并下载二维码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-vue-qr生成带logo和背景图片的二维码"><span class="nav-number">12.</span> <span class="nav-text">12. vue-qr生成带logo和背景图片的二维码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#☆属性说明☆："><span class="nav-number">12.1.</span> <span class="nav-text">☆属性说明☆：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-Vue项目中用Audio实现语音的播放"><span class="nav-number">13.</span> <span class="nav-text">13. Vue项目中用Audio实现语音的播放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-vue中设置内联样式style-动态绑定背景图backgroundimage不生效问题，以及动态绑定img的src-图片无法显示问题"><span class="nav-number">14.</span> <span class="nav-text">14. vue中设置内联样式style 动态绑定背景图backgroundimage不生效问题，以及动态绑定img的src,图片无法显示问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-Antdesign-Table-更改-columns-列的-css-属性"><span class="nav-number">15.</span> <span class="nav-text">15. Antdesign Table 更改 columns 列的 css 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-Maximum-call-stack-size-exceeded-错误解决"><span class="nav-number">16.</span> <span class="nav-text">16. Maximum call stack size exceeded 错误解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-video-js-插件的参数解释"><span class="nav-number">17.</span> <span class="nav-text">17. video.js 插件的参数解释</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化"><span class="nav-number">17.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CONTROLBAR组件的说明"><span class="nav-number">17.2.</span> <span class="nav-text">CONTROLBAR组件的说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态切换视频"><span class="nav-number">17.3.</span> <span class="nav-text">动态切换视频</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置语言（传统开发，VUE开发）"><span class="nav-number">17.4.</span> <span class="nav-text">设置语言（传统开发，VUE开发）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#传统开发"><span class="nav-number">17.4.1.</span> <span class="nav-text">传统开发</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#VUE开发"><span class="nav-number">17.4.2.</span> <span class="nav-text">VUE开发</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决在IPHONE中播放时自动全屏问题"><span class="nav-number">17.5.</span> <span class="nav-text">解决在IPHONE中播放时自动全屏问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OPTIONS参数："><span class="nav-number">17.6.</span> <span class="nav-text">OPTIONS参数：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#VIDEO-JS特定的参数"><span class="nav-number">17.7.</span> <span class="nav-text">VIDEO.JS特定的参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#组件参数"><span class="nav-number">17.8.</span> <span class="nav-text">组件参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0-共勉"><span class="nav-number">18.</span> <span class="nav-text">0 共勉</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">F゛</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/note/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

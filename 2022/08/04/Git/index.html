@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/note/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/note/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/note/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/note/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 创建SSH密钥，附上：SSH教程 2. 将仓库拉到本地： (如果是私有仓库，需要别人邀请你呦！)拉取origin远程仓库：  git clone (仓库URL) 然后你会发现你的Desktop上多了一个文件夹 (没错，就是那个仓库啦！) 注：最好把你项目创建在这个文件夹中，这样你在写项目的过程中更新了哪些代码看的很清楚。  3. 提交代码：注：你不能直接在master分支上提交代码 (如果是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="https://feng-knight.gitee.io/note/2022/08/04/Git/index.html">
+<meta property="og:site_name" content="F゛">
+<meta property="og:description" content="1. 创建SSH密钥，附上：SSH教程 2. 将仓库拉到本地： (如果是私有仓库，需要别人邀请你呦！)拉取origin远程仓库：  git clone (仓库URL) 然后你会发现你的Desktop上多了一个文件夹 (没错，就是那个仓库啦！) 注：最好把你项目创建在这个文件夹中，这样你在写项目的过程中更新了哪些代码看的很清楚。  3. 提交代码：注：你不能直接在master分支上提交代码 (如果是">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201010193159854.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201010193238553.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020101019372544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201010194053927.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/202004/bg2020042723.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8e499f6029a94ae5bdeeead96fc7663c.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/75c63d40128f4199aa079d13854867e2.png#pic_center">
+<meta property="article:published_time" content="2022-08-03T16:23:12.000Z">
+<meta property="article:modified_time" content="2022-08-03T16:23:12.000Z">
+<meta property="article:author" content="F゛">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201010193159854.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/note/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://feng-knight.gitee.io/note/2022/08/04/Git/"/>
+
+
+
+
+
+  <title>Git | F゛</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/note/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">F゛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Now that we have come so far, we might as well go a little further(既然已经走了这么远了，不如再往前走一走)</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://feng-knight.gitee.io/note/note/2022/08/04/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="F゛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/note/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F゛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-04T00:23:12+08:00">
+                2022-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-创建SSH密钥，附上：SSH教程"><a href="#1-创建SSH密钥，附上：SSH教程" class="headerlink" title="1. 创建SSH密钥，附上：SSH教程"></a>1. 创建SSH密钥，附上：<a href="http://fengknight.gitee.io/note/2020/03/10/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" target="_blank" rel="noopener">SSH教程</a></h4><hr>
+<h4 id="2-将仓库拉到本地：-如果是私有仓库，需要别人邀请你呦！"><a href="#2-将仓库拉到本地：-如果是私有仓库，需要别人邀请你呦！" class="headerlink" title="2. 将仓库拉到本地： (如果是私有仓库，需要别人邀请你呦！)"></a>2. 将仓库拉到本地： (如果是私有仓库，需要别人邀请你呦！)</h4><p>拉取origin远程仓库：</p>
+<blockquote>
+<p><code>git clone (仓库URL)</code></p>
+<p>然后你会发现你的Desktop上多了一个文件夹 (没错，就是那个仓库啦！)</p>
+<p><font color="red">注：</font>最好把你项目创建在这个文件夹中，这样你在写项目的过程中更新了哪些代码看的很清楚。</p>
+</blockquote>
+<h4 id="3-提交代码："><a href="#3-提交代码：" class="headerlink" title="3. 提交代码："></a>3. <strong>提交代码：</strong></h4><p><font color="red">注：</font>你不能直接在master分支上提交代码 (如果是别人创建的仓库，你可能连提交的权限都没有)，需要自己在创建一个分支。</p>
+<blockquote>
+<p>1) 在仓库文件夹中执行<code>gitbash</code>：</p>
+<p>2) 创建新的分支：<code>git branch 分支名</code></p>
+<p>3) 切换到你创建的分支上：<code>git checkout 分支名</code></p>
+<p>4) 查看状态：<code>git status</code></p>
+<p>5) 将你本地的修改提交到暂存区：</p>
+<p><code>git add .</code>(后面有个“点”，你别跳过了！！！)</p>
+<p><code>git commit -m &#39;&#39;</code> (后面引号的内容是有规范的)</p>
+<p>附上：<a href="https://gitee.com/help/articles/4231#article-header0" target="_blank" rel="noopener">git commit 提交规范</a></p>
+<blockquote>
+<p>① <code>git commit -m &#39;docs: update README.md&#39;</code></p>
+<p>② <code>git commit -m &#39;test&#39;</code></p>
+<p>我执行了第一个不行，会报错，所以执行了第二个命令。别问我为什么，因为我也不知道</p>
+</blockquote>
+<p>6) 推送分支：<code>git push</code></p>
+<blockquote>
+<p>在推送的时候你可能会出现一些问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: The current branch feng has no upstream branch.</span><br><span class="line">To push the current branch and <span class="keyword">set</span> the remote as upstream,</span><br><span class="line">use git push --<span class="keyword">set</span>-upstream origin feng</span><br></pre></td></tr></table></figure>
+
+<p>没关系，直接在执行一次它给你的这个命令就OK了！</p>
+<p>然后直接刷新<code>GitHub</code>在你创建的分支上就能看见你更新的代码了。</p>
+</blockquote>
+<p><font color="red">注：</font><font color="orange">最好在执行完每一步后，都执行以下<code>git status</code>，看看它推荐你下一步做什么，防止你自己操作失误！</font></p>
+</blockquote>
+<h4 id="4-有关项目文件夹和仓库文件夹位置及其他问题的注意点："><a href="#4-有关项目文件夹和仓库文件夹位置及其他问题的注意点：" class="headerlink" title="4. 有关项目文件夹和仓库文件夹位置及其他问题的注意点："></a>4. <font color="blue">有关项目文件夹和仓库文件夹位置及其他问题的注意点：</font></h4><ul>
+<li><p>如果你的项目文件夹和仓库处于同一等级（也就是同时处在桌面），那你可以将项目文件夹里的所有文件复制到仓库文件夹中</p>
+<ul>
+<li>肯定会出现文件重复问题：<code>.git</code>文件夹保留仓库里的，<code>README.md</code>保留项目里的。</li>
+</ul>
+</li>
+<li><p>现在仓库里的<code>.gitignorn</code>文件可以设置推送时过滤的文件（因为node_modules文件夹太大，也不需要推送到远程GitHub）</p>
+<ul>
+<li><pre><code class="js">.DS_Store
+node_modules
+/dist</code></pre>
+</li>
+</ul>
+</li>
+<li><p>再<code>vscode</code>中的源代码管理可以看见更改的文件：</p>
+<ul>
+<li>M 代表修改了这个文件</li>
+<li>U 代表新增的文件</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-从远程仓库拉代码："><a href="#5-从远程仓库拉代码：" class="headerlink" title="5. 从远程仓库拉代码："></a>5. <strong>从远程仓库拉代码：</strong></h4><ul>
+<li><p>说明：这个步骤是为了防止一个人以上开发会产生代码冲突，你不做这一步的话看不到别人为这个项目做的工作，也就是不知道别人在之前的项目代码上已经更新了哪些页面和功能，你也无法继续在别人的更新上继续做开发。</p>
+</li>
+<li><p>步骤：</p>
+<ul>
+<li><p>将远程<code>master</code>代码拉倒本地仓库：<code>git pull origin/master</code></p>
+</li>
+<li><p>将远程<code>master</code>代码合并到你的分支：<code>git merge origin/master</code></p>
+<blockquote>
+<p>对于合并代码，GitHub也有相应的操作，也可以查看你的分支与master主分支的是否有不相同的地方，这个自己百度去吧。或者我以后有时间再去介绍</p>
+</blockquote>
+</li>
+<li><p>若前两个步骤没有产生冲突（<code>conflict</code>）的话，你可以直接进<strong><code>git pull</code></strong>，相当于直接进行了上面两步</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-回滚代码："><a href="#6-回滚代码：" class="headerlink" title="6. 回滚代码："></a>6. <strong><font color="blue">回滚代码：</font></strong></h4><ul>
+<li>如果你在提交代码或者合并代码时出现了错误（可能是之前的代码被你覆盖，而你提交的代码又不是最新的等等情况），这时就需要你学会回滚自己的代码了。</li>
+<li>查看历史记录：<code>git log</code>（复制你想退回的你需要的历史代码那里很长一段的历史记录码）</li>
+<li>然后执行 <code>git reset --hard 你刚才复制的历史记录码</code></li>
+<li>最后 <code>git pull</code>就ok了。</li>
+<li><font color="red">注：</font><font color="orange">注意多执行<code>git status</code>，看看它推荐你下一步做什么，防止你自己操作失误！</font> </li>
+</ul>
+<h4 id="7-git-撤销-merging，git取消merge"><a href="#7-git-撤销-merging，git取消merge" class="headerlink" title="7. git 撤销 merging，git取消merge"></a>7. <font color="blue">git 撤销 merging，git取消merge</font></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin test</span><br><span class="line"><span class="comment">// git pull合并代码的时候，若发生冲突，会处于merging状态，检查代码，发现自己的分支低于主分支，这个时候想撤销merge</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 撤销merge</span></span><br><span class="line">$ git reset --hard HEAD (or sha_1)</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-git-清除、记住用户名和密码"><a href="#8-git-清除、记住用户名和密码" class="headerlink" title="8. git 清除、记住用户名和密码"></a>8. <font color="blue">git 清除、记住用户名和密码</font></h4><p>清空所有用户名和密码：</p>
+<blockquote>
+<p><code>git config --system --unset credential.helper</code></p>
+</blockquote>
+<p>清除缓存的用户名和密码：</p>
+<blockquote>
+<p><code>git credential-manager uninstall</code></p>
+</blockquote>
+<p>记住密码：</p>
+<blockquote>
+<p><code>git config --global credential.helper store</code></p>
+</blockquote>
+<h4 id="9-VSCode-配置-Git"><a href="#9-VSCode-配置-Git" class="headerlink" title="9. VSCode 配置 Git"></a>9. <font color="#00AAF0">VSCode 配置 Git</font></h4><p>本地安装了git，但是在VSCode上面却找不到git，提示要安装git</p>
+<p> <img src="https://img-blog.csdnimg.cn/20201010193159854.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>查看输出，提示VSCode找不到 git.exe</p>
+<p> <img src="https://img-blog.csdnimg.cn/20201010193238553.png" alt="img"></p>
+<p> 原因是VSCode中git默认是放在C盘，就是上图的路径中，如果 git.exe 存在其他盘，需要对VSCode进行配置，告诉他git.exe的位置。</p>
+<p>点击左下角的设置按钮，选择 settings，搜索  git.path ，点击 edit in setting.json </p>
+<p><img src="https://img-blog.csdnimg.cn/2020101019372544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70" alt="img">)<img src="https://img-blog.csdnimg.cn/20201010194053927.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3Mzg1NjE3,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>对 git.path 添加 git.exe 路径：</p>
+<p><code>{
+    &quot;git.path&quot;: &quot;D:/Git/cmd/git.exe&quot;
+}</code><br>注意： 路径要写成   <strong>/</strong>/**  或者   <strong>\</strong>\**  的形式</p>
+<p><font color="red">注：</font>转载于：<a href="https://blog.csdn.net/qq_37385617/article/details/109002997" target="_blank" rel="noopener">https://blog.csdn.net/qq_37385617/article/details/109002997</a></p>
+<hr>
+<h4 id="10-git-cherry-pick-教程"><a href="#10-git-cherry-pick-教程" class="headerlink" title="10. git cherry-pick 教程"></a>10. <font color="#00AAF0">git cherry-pick 教程</font></h4><p>对于多分支的代码库，将代码从一个分支转移到另一个分支是常见需求。</p>
+<p>这时分两种情况。一种情况是，你需要另一个分支的所有代码变动，那么就采用合并（<code>git merge</code>）。另一种情况是，你只需要部分代码变动（某几个提交），这时可以采用 <code>Cherry pick</code>。</p>
+<p><img src="https://www.wangbase.com/blogimg/asset/202004/bg2020042723.jpg" alt="img"></p>
+<h5 id="一、基本用法"><a href="#一、基本用法" class="headerlink" title="一、基本用法"></a>一、基本用法</h5><p><code>git cherry-pick</code>命令的作用，就是将指定的提交（commit）应用于其他分支。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick &lt;commitHash&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令就会将指定的提交<code>commitHash</code>，应用于当前分支。这会在当前分支产生一个新的提交，当然它们的哈希值会不一样。</p>
+<p>举例来说，代码仓库有<code>master</code>和<code>feature</code>两个分支。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a - b - c - d   Master</span><br><span class="line">     \</span><br><span class="line">       e - f - g Feature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>现在将提交<code>f</code>应用到<code>master</code>分支。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 master 分支</span></span><br><span class="line">$ git checkout master</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cherry pick 操作</span></span><br><span class="line">$ git cherry-pick f</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的操作完成以后，代码库就变成了下面的样子。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a - b - c - d - f   Master</span><br><span class="line">     \</span><br><span class="line">       e - f - g Feature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>从上面可以看到，<code>master</code>分支的末尾增加了一个提交<code>f</code>。</p>
+<p><code>git cherry-pick</code>命令的参数，不一定是提交的哈希值，分支名也是可以的，表示转移该分支的最新提交。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick feature</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码表示将<code>feature</code>分支的最近一次提交，转移到当前分支。</p>
+<h5 id="二、转移多个提交"><a href="#二、转移多个提交" class="headerlink" title="二、转移多个提交"></a>二、转移多个提交</h5><p>Cherry pick 支持一次转移多个提交。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick &lt;HashA&gt; &lt;HashB&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的命令将 A 和 B 两个提交应用到当前分支。这会在当前分支生成两个对应的新提交。</p>
+<p>如果想要转移一系列的连续提交，可以使用下面的简便语法。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick A..B </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的命令可以转移从 A 到 B 的所有提交。它们必须按照正确的顺序放置：提交 A 必须早于提交 B，否则命令将失败，但不会报错。</p>
+<p>注意，使用上面的命令，提交 A 将不会包含在 Cherry pick 中。如果要包含提交 A，可以使用下面的语法。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick A^..B </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="三、配置项"><a href="#三、配置项" class="headerlink" title="三、配置项"></a>三、配置项</h5><p><code>git cherry-pick</code>命令的常用配置项如下。</p>
+<p><strong>（1）<code>-e</code>，<code>--edit</code></strong></p>
+<p>打开外部编辑器，编辑提交信息。</p>
+<p><strong>（2）<code>-n</code>，<code>--no-commit</code></strong></p>
+<p>只更新工作区和暂存区，不产生新的提交。</p>
+<p><strong>（3）<code>-x</code></strong></p>
+<p>在提交信息的末尾追加一行<code>(cherry picked from commit ...)</code>，方便以后查到这个提交是如何产生的。</p>
+<p><strong>（4）<code>-s</code>，<code>--signoff</code></strong></p>
+<p>在提交信息的末尾追加一行操作者的签名，表示是谁进行了这个操作。</p>
+<p><strong>（5）<code>-m parent-number</code>，<code>--mainline parent-number</code></strong></p>
+<p>如果原始提交是一个合并节点，来自于两个分支的合并，那么 Cherry pick 默认将失败，因为它不知道应该采用哪个分支的代码变动。</p>
+<p><code>-m</code>配置项告诉 Git，应该采用哪个分支的变动。它的参数<code>parent-number</code>是一个从<code>1</code>开始的整数，代表原始提交的父分支编号。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick -m 1 &lt;commitHash&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令表示，Cherry pick 采用提交<code>commitHash</code>来自编号1的父分支的变动。</p>
+<p>一般来说，1号父分支是接受变动的分支（the branch being merged into），2号父分支是作为变动来源的分支（the branch being merged from）。</p>
+<h5 id="四、代码冲突"><a href="#四、代码冲突" class="headerlink" title="四、代码冲突"></a>四、代码冲突</h5><p>如果操作过程中发生代码冲突，Cherry pick 会停下来，让用户决定如何继续操作。</p>
+<p><strong>（1）<code>--continue</code></strong></p>
+<p>用户解决代码冲突后，第一步将修改的文件重新加入暂存区（<code>git add .</code>），第二步使用下面的命令，让 Cherry pick 过程继续执行。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>（2）<code>--abort</code></strong></p>
+<p>发生代码冲突后，放弃合并，回到操作前的样子。</p>
+<p><strong>（3）<code>--quit</code></strong></p>
+<p>发生代码冲突后，退出 Cherry pick，但是不回到操作前的样子。</p>
+<h5 id="五、转移到另一个代码库"><a href="#五、转移到另一个代码库" class="headerlink" title="五、转移到另一个代码库"></a>五、转移到另一个代码库</h5><p>Cherry pick 也支持转移另一个代码库的提交，方法是先将该库加为远程仓库。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add target git://gitUrl</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令添加了一个远程仓库<code>target</code>。</p>
+<p>然后，将远程代码抓取到本地。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch target</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面命令将远程代码仓库抓取到本地。</p>
+<p>接着，检查一下要从远程仓库转移的提交，获取它的哈希值。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> target/master</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>最后，使用<code>git cherry-pick</code>命令转移提交。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cherry-pick &lt;commitHash&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><font color="red">注：</font>转载于：<a href="http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html" target="_blank" rel="noopener">阮一峰的网络日志</a></p>
+<hr>
+<h4 id="11-Git-解决-fatal-not-in-a-git-directory"><a href="#11-Git-解决-fatal-not-in-a-git-directory" class="headerlink" title="11. Git 解决 fatal: not in a git directory"></a>11. <font color="#00AAF0">Git 解决 <code>fatal: not in a git directory</code></font></h4><p>在添加 git 邮箱和账号时会出现 <code>fatal: not in a git directory</code><br>下面就是来交大家如何快速解决这个问题。</p>
+<p>1) 先打开Git Bash所在的文件夹</p>
+<p><img src="https://img-blog.csdnimg.cn/8e499f6029a94ae5bdeeead96fc7663c.png#pic_center" alt="在这里插入图片描述"></p>
+<p>2) 双击打开git-cmd.exe</p>
+<p><img src="https://img-blog.csdnimg.cn/75c63d40128f4199aa079d13854867e2.png#pic_center" alt="在这里插入图片描述"></p>
+<p>3) 先输 <code>git config –global user.email 你的邮箱号</code><br>4) 再输 <code>git config –global user.name 账号名</code><br>5) 分别回车后即可解决<code>not in a git directory</code>问题<br>6) 切记一定要先在cmd中先输入邮箱再输入账号，否则依旧会报错<br>结语：实质上第一次报错是因为目录结构不对，Git Bash图中顶上的 MINGW64 ~ 是系统根目录 ，我们需要切换至Git 目录，就不会报错了。</p>
+<p><font color="red">注：</font>转载于：<a href="https://blog.csdn.net/jzt20040420/article/details/124905734" target="_blank" rel="noopener">https://blog.csdn.net/jzt20040420/article/details/124905734</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2022/08/04/Vue+Antd%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" rel="next" title="Vue+Antd问题总结">
+                <i class="fa fa-chevron-left"></i> Vue+Antd问题总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2022/09/13/HTML%E3%80%81JavaScript%E4%B8%8EVue%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" rel="prev" title="HTML、JavaScript与Vue相关知识">
+                HTML、JavaScript与Vue相关知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/note/images/dog.jpg"
+                alt="F゛" />
+            
+              <p class="site-author-name" itemprop="name">F゛</p>
+              <p class="site-description motion-element" itemprop="description">study hard and make progress every day!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/note/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建SSH密钥，附上：SSH教程"><span class="nav-number">1.</span> <span class="nav-text">1. 创建SSH密钥，附上：SSH教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-将仓库拉到本地：-如果是私有仓库，需要别人邀请你呦！"><span class="nav-number">2.</span> <span class="nav-text">2. 将仓库拉到本地： (如果是私有仓库，需要别人邀请你呦！)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-提交代码："><span class="nav-number">3.</span> <span class="nav-text">3. 提交代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-有关项目文件夹和仓库文件夹位置及其他问题的注意点："><span class="nav-number">4.</span> <span class="nav-text">4. 有关项目文件夹和仓库文件夹位置及其他问题的注意点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-从远程仓库拉代码："><span class="nav-number">5.</span> <span class="nav-text">5. 从远程仓库拉代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-回滚代码："><span class="nav-number">6.</span> <span class="nav-text">6. 回滚代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-git-撤销-merging，git取消merge"><span class="nav-number">7.</span> <span class="nav-text">7. git 撤销 merging，git取消merge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-git-清除、记住用户名和密码"><span class="nav-number">8.</span> <span class="nav-text">8. git 清除、记住用户名和密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-VSCode-配置-Git"><span class="nav-number">9.</span> <span class="nav-text">9. VSCode 配置 Git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-git-cherry-pick-教程"><span class="nav-number">10.</span> <span class="nav-text">10. git cherry-pick 教程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本用法"><span class="nav-number">10.1.</span> <span class="nav-text">一、基本用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、转移多个提交"><span class="nav-number">10.2.</span> <span class="nav-text">二、转移多个提交</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、配置项"><span class="nav-number">10.3.</span> <span class="nav-text">三、配置项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、代码冲突"><span class="nav-number">10.4.</span> <span class="nav-text">四、代码冲突</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五、转移到另一个代码库"><span class="nav-number">10.5.</span> <span class="nav-text">五、转移到另一个代码库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-Git-解决-fatal-not-in-a-git-directory"><span class="nav-number">11.</span> <span class="nav-text">11. Git 解决 fatal: not in a git directory</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">F゛</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/note/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/note/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/note/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
