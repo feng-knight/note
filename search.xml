@@ -447,6 +447,12 @@
 
 
 
+<h5 id="42-获取Server图片路径"><a href="#42-获取Server图片路径" class="headerlink" title="42. 获取Server图片路径"></a>42. 获取Server图片路径</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取服务器图片路径</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;String&#125;</span> </span>src image资源路径</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;String&#125;</span> </span>type image资源类型</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getImagePath = <span class="function">(<span class="params">src, type = <span class="string">'png'</span>, path = <span class="string">'/mp_akyl'</span></span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (!src || !type) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> pathReplace = path.replace(<span class="regexp">/^\/+|\/+$/g</span>, <span class="string">''</span>)</span><br><span class="line">	<span class="keyword">const</span> srcReplace = src.replace(<span class="regexp">/^\/+/</span>, <span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="string">`https://hahacloud-static-resource.obs.cn-east-3.myhuaweicloud.com/hahacloud/<span class="subst">$&#123; pathReplace &#125;</span>/<span class="subst">$&#123; srcReplace &#125;</span>.<span class="subst">$&#123; type &#125;</span>`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 
 
 <hr>
